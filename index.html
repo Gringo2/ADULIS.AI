@@ -2,278 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {/* Essential for responsiveness */}
-    <title>Search Engine MVP Project - v1.0.0 Documentation (Responsive)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine MVP Project - v1.0.0 Documentation (Full & Responsive)</title>
     <style>
+        /* --- Root Variables (Same as before) --- */
         :root {
-            --primary-color: #0056b3; /* Deep Blue */
-            --secondary-color: #17a2b8; /* Teal */
-            --accent-color: #007bff; /* Bright Blue */
-            --text-color: #343a40;
-            --bg-color: #f8f9fa;
-            --bg-light: #ffffff;
-            --border-color: #dee2e6;
-            --code-bg: #e9ecef;
-            --code-color: #c7254e;
-            --note-bg: #e7f3fe;
-            --note-border: #2196F3;
-            --warning-bg: #fff3cd;
-            --warning-border: #ffeeba;
-            --danger-bg: #f8d7da;
-            --danger-border: #f5c6cb;
+            --primary-color: #0056b3; --secondary-color: #17a2b8; --accent-color: #007bff;
+            --text-color: #343a40; --bg-color: #f8f9fa; --bg-light: #ffffff;
+            --border-color: #dee2e6; --code-bg: #e9ecef; --code-color: #c7254e;
+            --note-bg: #e7f3fe; --note-border: #2196F3; --warning-bg: #fff3cd;
+            --warning-border: #ffeeba; --danger-bg: #f8d7da; --danger-border: #f5c6cb;
             --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --sidebar-width: 280px;
+            --header-height: 50px;
         }
-
-        /* --- Base Styles --- */
-        html {
-             scroll-behavior: smooth; /* Enable smooth scrolling */
+        html { scroll-behavior: smooth; }
+        body { /* --- Base body styles (Same as before) --- */
+            font-family: var(--font-stack); line-height: 1.7; margin: 0; padding: 0;
+            background-color: var(--bg-color); color: var(--text-color); font-size: 16px;
+             transition: padding-left 0.3s ease;
         }
-
-        body {
-            font-family: var(--font-stack);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            font-size: 16px; /* Base font size */
-        }
-
-        /* --- Sidebar Styles (Default - Large Screens) --- */
-        #sidebar {
-            width: 280px;
-            background-color: #343a40;
-            color: #f8f9fa;
-            padding: 25px 15px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-            border-right: 1px solid var(--border-color);
-            font-size: 0.95em;
-            transition: width 0.3s ease; /* Smooth transition for potential future toggling */
-        }
-        #sidebar h2 {
-            color: #ffffff;
-            font-size: 1.3em;
-            margin-top: 0;
-            border-bottom: 1px solid #6c757d;
-            padding-bottom: 10px;
-            white-space: nowrap; /* Prevent title wrapping */
-        }
-        #sidebar ul { list-style: none; padding: 0; margin: 0; }
-        #sidebar ul li a {
-            color: #adb5bd; text-decoration: none; display: block;
-            padding: 8px 15px; border-radius: 4px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-            font-size: 0.92em;
-            white-space: nowrap; /* Prevent link wrapping */
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        #sidebar ul li a:hover, #sidebar ul li a.active {
-            background-color: #495057; color: #ffffff;
-        }
-        #sidebar ul ul { margin-left: 15px; margin-top: 5px; }
-        #sidebar ul ul li a {
-            font-size: 0.88em; padding-left: 25px; color: #ced4da;
-        }
-         #sidebar ul ul ul li a { /* Third level */
-            font-size: 0.85em; padding-left: 35px; color: #9fa6ad;
-         }
-
-        /* --- Main Content Styles (Default - Large Screens) --- */
-        #main-content {
-            margin-left: 300px; /* Initial margin for sidebar */
-            padding: 30px 40px;
-            width: calc(100% - 300px); /* Adjust width based on sidebar */
-            max-width: 1200px;
-            background-color: var(--bg-light);
-            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            transition: margin-left 0.3s ease; /* Match sidebar transition */
-        }
-        h1, h2, h3, h4, h5 { /* Base heading styles */
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-top: 40px;
-            scroll-margin-top: 20px; /* Offset for potential fixed headers */
-        }
-        h1 { font-size: 2.2em; margin-top: 0; border-color: var(--primary-color); }
-        h2 { font-size: 1.8em; }
-        h3 { font-size: 1.5em; border-bottom-width: 1px; }
-        h4 { font-size: 1.2em; border-bottom: none; color: var(--secondary-color); }
-        h5 { font-size: 1.1em; border-bottom: none; color: #6c757d; margin-top: 20px;}
-
-        p, li { color: #495057; margin-bottom: 12px; }
-        ul, ol { margin-left: 20px; padding-left: 15px; }
-        li { margin-bottom: 10px; }
-
-        code { /* Styling for code */
-            background-color: var(--code-bg); padding: 3px 6px; border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace; font-size: 0.95em;
-            color: var(--code-color); word-wrap: break-word;
-        }
-        pre { /* Styling for preformatted text blocks */
-            background-color: #f1f3f5; padding: 15px; border-radius: 5px;
-            overflow-x: auto; /* Ensure horizontal scroll for wide code */
-            border: 1px solid var(--border-color);
-            font-size: 0.9em; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        }
-        pre code { /* Code inside pre */
-            background-color: transparent; padding: 0; border: none;
-            color: #212529; word-wrap: normal; white-space: pre;
-        }
-        /* --- Note/Warning/etc Styles --- */
-        .note, .important, .warning, .disclaimer {
-            padding: 15px 20px; margin: 25px 0; border-radius: 5px;
-            border-left-width: 5px; border-left-style: solid;
-        }
-        .note { background-color: var(--note-bg); border-color: var(--note-border); color: #031633; }
-        .important { background-color: var(--warning-bg); border-color: var(--warning-border); color: #856404; }
-        .warning { background-color: var(--danger-bg); border-color: var(--danger-border); color: #721c24;}
-        .disclaimer { background-color: var(--danger-bg); border-color: var(--danger-border); color: #721c24; font-weight: bold;}
-
-        /* --- Table Styles --- */
-        table {
-            width: 100%; border-collapse: collapse; margin: 25px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            display: block; /* Allow table to scroll horizontally if needed */
-            overflow-x: auto;
-        }
-        th, td { border: 1px solid var(--border-color); padding: 12px 15px; text-align: left; white-space: nowrap;} /* Prevent text wrapping in cells initially */
-        td { white-space: normal; } /* Allow cell content to wrap */
-        th { background-color: var(--code-bg); font-weight: bold; color: #495057; }
-        tr:nth-child(even) { background-color: #f8f9fa; }
-
-        /* --- Box Styles --- */
-        .component-box, .section-box, .test-case {
-            border: 1px solid var(--border-color); padding: 20px 25px; margin-bottom: 25px;
-            border-radius: 5px; background-color: #f8f9fa;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .component-box strong, .section-box h3, .test-case h3 {
-            display: block; margin-bottom: 10px; color: var(--primary-color);
-            font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 8px; margin-top: 0;
-        }
-        .test-case h3 { color: var(--accent-color); }
-
-        /* --- Compliance & TODO Styles --- */
-        .compliance-status { /* Status badges */
-            padding: 6px 10px; border-radius: 4px; font-weight: bold;
-            display: inline-block; font-size: 0.9em;
-        }
-        .status-compliant { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
-        .status-partial { background-color: var(--warning-bg); color: #856404; border: 1px solid var(--warning-border);}
-        .status-noncompliant { background-color: var(--danger-bg); color: #721c24; border: 1px solid var(--danger-border);}
-        .todo-list { /* TODO list container */
-            background-color: #f0f0f0; border: 1px solid #ccc; padding: 20px;
-            margin-top: 20px; border-radius: 5px;
-        }
-        .todo-list h4 { /* Heading within TODO list */
-             margin-top: 0; border-bottom: 1px solid #ccc; padding-bottom: 10px; color: #333;
-        }
-        .todo-item { /* Individual TODO item */
-            margin-bottom: 10px; padding-left: 25px; position: relative;
-        }
-        .todo-item::before { /* Checkbox styling */
-            content: "☐"; position: absolute; left: 0; top: 1px;
-            font-size: 1.3em; color: var(--danger-border);
-        }
-        .category-heading { /* Headings within TODO list */
-            font-weight: bold; margin-top: 20px; margin-bottom: 8px;
-            color: var(--primary-color); font-size: 1.05em;
-        }
-
-        .path { font-family: monospace; color: #666;}
-        .terminal { font-family: monospace; color: #e83e8c; }
-
-        /* ============================================= */
-        /* == RESPONSIVE STYLES == */
-        /* ============================================= */
-
-        /* --- Medium Screens (Tablets, Smaller Laptops) --- */
-        @media (max-width: 992px) {
-            body {
-                display: block; /* Change flex display to block */
-            }
-
-            #sidebar {
-                position: static; /* Remove fixed positioning */
-                width: 100%; /* Take full width */
-                height: auto; /* Height adjusts to content */
-                margin-bottom: 20px; /* Add space below */
-                border-right: none; /* Remove border */
-                box-sizing: border-box; /* Include padding in width calculation */
-                 padding: 15px; /* Adjust padding */
-            }
-             #sidebar h2 {
-                 font-size: 1.2em; /* Slightly smaller title */
-             }
-             #sidebar ul li a {
-                 padding: 10px 15px; /* Slightly larger tap targets */
-             }
-
-
-            #main-content {
-                margin-left: 0; /* Remove margin needed for fixed sidebar */
-                width: 100%; /* Take full width */
-                padding: 20px; /* Adjust padding */
-                box-sizing: border-box; /* Include padding in width calculation */
-                border-radius: 0; /* Optional: remove rounding on small screens */
-                box-shadow: none; /* Optional: remove shadow */
-                margin-top: 0;
-            }
-
-             h1 { font-size: 2em; }
-             h2 { font-size: 1.6em; }
-             h3 { font-size: 1.3em; }
-        }
-
-        /* --- Small Screens (Mobile Phones) --- */
-        @media (max-width: 576px) {
-             body {
-                 font-size: 15px; /* Slightly smaller base font */
-             }
-             #main-content {
-                 padding: 15px; /* Reduce padding further */
-             }
-             h1 { font-size: 1.8em; }
-             h2 { font-size: 1.5em; }
-             h3 { font-size: 1.2em; }
-             h4 { font-size: 1.1em; }
-
-             pre {
-                 font-size: 0.85em; /* Smaller code font */
-                 padding: 10px;
-             }
-             code {
-                 font-size: 0.9em;
-             }
-             th, td {
-                 padding: 8px 10px; /* Smaller table padding */
-             }
-             .component-box, .section-box, .test-case {
-                 padding: 15px 20px;
-             }
-             /* Optional: Adjust sidebar link padding further if needed */
-             #sidebar ul li a {
-                 padding: 8px 12px;
-             }
-        }
+        /* --- Header and Burger Menu Styles (Same as before) --- */
+        #page-header{position:fixed;top:0;left:0;width:100%;height:var(--header-height);background-color:#343a40;color:white;display:flex;align-items:center;padding:0 15px;z-index:1050;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+        #burger-menu{background:none;border:none;color:white;font-size:1.8em;cursor:pointer;padding:5px 10px;line-height:1;margin-right:15px;z-index:1051}
+        #burger-menu span{display:block;width:25px;height:3px;background-color:white;margin:5px 0;border-radius:1px;transition:all .3s ease}
+        body:not(.sidebar-hidden) #burger-menu span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+        body:not(.sidebar-hidden) #burger-menu span:nth-child(2){opacity:0}
+        body:not(.sidebar-hidden) #burger-menu span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+        #header-title{font-size:1.1em;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        /* --- Sidebar Styles (Same as before, with transitions) --- */
+        #sidebar{width:var(--sidebar-width);background-color:#343a40;color:#f8f9fa;padding:15px;padding-top:calc(var(--header-height) + 15px);height:100vh;position:fixed;top:0;left:0;overflow-y:auto;border-right:1px solid var(--border-color);font-size:.95em;z-index:1000;transform:translateX(0);transition:transform .3s ease;box-sizing:border-box}
+        body.sidebar-hidden #sidebar{transform:translateX(calc(-1 * var(--sidebar-width)))}
+        #sidebar h2{color:#ffffff;font-size:1.3em;margin-top:0;border-bottom:1px solid #6c757d;padding-bottom:10px;white-space:nowrap}
+        #sidebar ul{list-style:none;padding:0;margin:0}
+        #sidebar ul li a{color:#adb5bd;text-decoration:none;display:block;padding:8px 15px;border-radius:4px;transition:background-color .2s ease,color .2s ease;font-size:.92em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        #sidebar ul li a:hover,#sidebar ul li a.active{background-color:#495057;color:#ffffff}
+        #sidebar ul ul{margin-left:15px;margin-top:5px}
+        #sidebar ul ul li a{font-size:.88em;padding-left:25px;color:#ced4da}
+        #sidebar ul ul ul li a{font-size:.85em;padding-left:35px;color:#9fa6ad}
+        /* --- Main Content Styles (Same as before, with transitions) --- */
+        #main-content{padding:30px 40px;padding-top:calc(var(--header-height) + 30px);width:100%;max-width:1200px;background-color:var(--bg-light);border-radius:8px;margin:0 auto;margin-left:var(--sidebar-width);box-sizing:border-box;transition:margin-left .3s ease}
+        body.sidebar-hidden #main-content{margin-left:0}
+        /* --- Base Element Styles (Headings, Text, Code, etc. - Same as before) --- */
+        h1,h2,h3,h4,h5{color:var(--primary-color);border-bottom:2px solid var(--border-color);padding-bottom:8px;margin-top:40px;scroll-margin-top:calc(var(--header-height) + 20px)}
+        h1{font-size:2.2em;margin-top:0;border-color:var(--primary-color)} h2{font-size:1.8em} h3{font-size:1.5em;border-bottom-width:1px} h4{font-size:1.2em;border-bottom:none;color:var(--secondary-color)} h5{font-size:1.1em;border-bottom:none;color:#6c757d;margin-top:20px}
+        p,li{color:#495057;margin-bottom:12px} ul,ol{margin-left:20px;padding-left:15px} li{margin-bottom:10px}
+        code{background-color:var(--code-bg);padding:3px 6px;border-radius:4px;font-family:'Courier New',Courier,monospace;font-size:.95em;color:var(--code-color);word-wrap:break-word}
+        pre{background-color:#f1f3f5;padding:15px;border-radius:5px;overflow-x:auto;border:1px solid var(--border-color);font-size:.9em;box-shadow:inset 0 1px 3px rgba(0,0,0,.05)}
+        pre code{background-color:transparent;padding:0;border:none;color:#212529;word-wrap:normal;white-space:pre}
+        .note,.important,.warning,.disclaimer{padding:15px 20px;margin:25px 0;border-radius:5px;border-left-width:5px;border-left-style:solid}
+        .note{background-color:var(--note-bg);border-color:var(--note-border);color:#031633}
+        .important{background-color:var(--warning-bg);border-color:var(--warning-border);color:#856404}
+        .warning{background-color:var(--danger-bg);border-color:var(--danger-border);color:#721c24}
+        .disclaimer{background-color:var(--danger-bg);border-color:var(--danger-border);color:#721c24;font-weight:bold}
+        table{width:100%;border-collapse:collapse;margin:25px 0;box-shadow:0 1px 3px rgba(0,0,0,.1);display:block;overflow-x:auto}
+        th,td{border:1px solid var(--border-color);padding:12px 15px;text-align:left;white-space:nowrap}
+        td{white-space:normal}
+        th{background-color:var(--code-bg);font-weight:bold;color:#495057}
+        tr:nth-child(even){background-color:#f8f9fa}
+        .component-box,.section-box,.test-case{border:1px solid var(--border-color);padding:20px 25px;margin-bottom:25px;border-radius:5px;background-color:#f8f9fa;box-shadow:inset 0 1px 3px rgba(0,0,0,.05)}
+        .component-box strong,.section-box h3,.test-case h3{display:block;margin-bottom:10px;color:var(--primary-color);font-size:1.1em;border-bottom:1px solid #ccc;padding-bottom:8px;margin-top:0}
+        .test-case h3{color:var(--accent-color)}
+        .compliance-status{padding:6px 10px;border-radius:4px;font-weight:bold;display:inline-block;font-size:.9em}
+        .status-compliant{background-color:#d4edda;color:#155724;border:1px solid #c3e6cb}
+        .status-partial{background-color:var(--warning-bg);color:#856404;border:1px solid var(--warning-border)}
+        .status-noncompliant{background-color:var(--danger-bg);color:#721c24;border:1px solid var(--danger-border)}
+        .todo-list{background-color:#f0f0f0;border:1px solid #ccc;padding:20px;margin-top:20px;border-radius:5px}
+        .todo-list h4{margin-top:0;border-bottom:1px solid #ccc;padding-bottom:10px;color:#333}
+        .todo-item{margin-bottom:10px;padding-left:25px;position:relative}
+        .todo-item::before{content:"☐";position:absolute;left:0;top:1px;font-size:1.3em;color:var(--danger-border)}
+        .category-heading{font-weight:bold;margin-top:20px;margin-bottom:8px;color:var(--primary-color);font-size:1.05em}
+        .path{font-family:monospace;color:#666}
+        .terminal{font-family:monospace;color:#e83e8c}
+        /* --- Responsive Styles (Same as before) --- */
+        @media (max-width: 992px){body:not(.sidebar-force-show){padding-left:0}body:not(.sidebar-force-show) #sidebar{transform:translateX(calc(-1 * var(--sidebar-width)))}body:not(.sidebar-force-show) #main-content{margin-left:0}body.sidebar-shown-mobile #sidebar{transform:translateX(0);box-shadow:2px 0 5px rgba(0,0,0,.2)}body.sidebar-shown-mobile #main-content::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.3);z-index:999}#main-content{padding:20px;padding-top:calc(var(--header-height) + 20px);border-radius:0;box-shadow:none;margin:0 auto;transition:none}h1{font-size:2em}h2{font-size:1.6em}h3{font-size:1.3em}}
+        @media (max-width: 576px){body{font-size:15px}#main-content{padding:15px;padding-top:calc(var(--header-height) + 15px)}h1{font-size:1.8em}h2{font-size:1.5em}h3{font-size:1.2em}h4{font-size:1.1em}pre{font-size:.85em;padding:10px}code{font-size:.9em}th,td{padding:8px 10px}.component-box,.section-box,.test-case{padding:15px 20px}#sidebar{font-size:.9em;width:250px}body.sidebar-hidden #sidebar{transform:translateX(-250px)}body:not(.sidebar-force-show) #sidebar{transform:translateX(-250px)}}
 
     </style>
 </head>
 <body>
+    <!-- Header containing the burger menu -->
+    <header id="page-header">
+        <button id="burger-menu" aria-label="Toggle Navigation Menu" aria-expanded="true" aria-controls="sidebar"> {/* Start Expanded */}
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div id="header-title">Search Engine Project Docs</div>
+    </header>
 
     <aside id="sidebar">
         <h2>Project Navigation</h2>
-        <!-- Sidebar Content (Same as before) -->
+        <!-- Sidebar HTML Structure -->
         <ul>
             <li><a href="#section_overview">1. Overview & Purpose</a></li>
             <li><a href="#section_mvp_design">2. MVP Design (v1.0.0)</a>
@@ -327,163 +147,774 @@
     </aside>
 
     <main id="main-content">
-        <!-- Main Content Sections (Same HTML structure as before) -->
+
         <section id="section_overview">
              <h1>Search Engine MVP Project Documentation (v1.0.0 Focus)</h1>
-             <!-- ... content ... -->
+             <p>This document provides comprehensive details specifically focused on the <strong>Search Engine Minimum Viable Product (MVP) version 1.0.0</strong>. It covers the initial design, setup instructions for this version, its compliance assessment against Ethiopian law (PDPL), and the immediate planning steps derived from that assessment. Detailed testing guides for the Nutch component are also included.</p>
+             <p>It serves as the primary reference for understanding the baseline system established by the MVP.</p>
+             <table>
+                 <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+                 <tbody>
+                     <tr><td>System Version Described</td><td>1.0.0 (MVP Baseline)</td></tr>
+                     <tr><td>Documentation Focus</td><td>MVP State, Setup, Assessment, Immediate Planning</td></tr>
+                 </tbody>
+             </table>
         </section>
 
         <section id="section_mvp_design">
             <h2>2. MVP Design (v1.0.0)</h2>
-            <section id="subsection_mvp_features"><h3>2.1 Features (MVP v1.0.0)</h3><!-- ... content ... --></section>
-            <section id="subsection_mvp_arch"><h3>2.2 Architecture (MVP v1.0.0)</h3><h4>2.2.1 Architectural Overview</h4><!-- ... --><h4>2.2.2 Component Breakdown</h4><!-- ... --><h4>2.2.3 Data Flow Summary & Schema</h4><!-- ... --></section>
-            <section id="subsection_mvp_design_elements"><h3>2.3 Design Elements & Choices (MVP v1.0.0)</h3><!-- ... content ... --></section>
-            <section id="subsection_mvp_tech_stack"><h3>2.4 Technology Stack & Limits (MVP v1.0.0)</h3><!-- ... content ... --></section>
+            <p>Details the initial design and architecture of the Minimum Viable Product, focused on demonstrating core functionality.</p>
+
+            <section id="subsection_mvp_features">
+                <h3>2.1 Features (MVP v1.0.0)</h3>
+                 <p>This MVP version includes the following core features:</p>
+                 <ul>
+                     <li><strong>Limited Web Crawling:</strong> Ability to crawl a predefined set of seed URLs using Apache Nutch, respecting basic politeness settings and URL filters.</li>
+                     <li><strong>Raw Data Storage:</strong> Stores raw fetched content (HTML, text) and crawl metadata generated by Nutch into Hadoop HDFS (running in Pseudo-Distributed mode).</li>
+                     <li><strong>Basic Content Processing & Extraction:</strong> Extracts key fields (URL, Page Title, Body Text, Crawl Timestamp) from crawled web pages via a conceptual custom application.</li>
+                     <li><strong>Data Pipelining:</strong> Uses Apache Kafka as a message bus to transfer processed data from the extraction stage to the indexing stage.</li>
+                     <li><strong>Content Indexing:</strong> Indexes the extracted fields (URL, Title, Content, Timestamp) into the Vespa search engine using a defined schema (`page.sd`), fed via a conceptual custom application.</li>
+                     <li><strong>Keyword Search Interface:</strong> Provides a minimal web frontend with a search box allowing users to enter keyword queries.</li>
+                     <li><strong>Basic Search Results Display:</strong> Retrieves and displays a list of search results based on keyword matches against the indexed title and content fields. Results include the page title and URL. Ranking is based on Vespa's default BM25 implementation.</li>
+                     <li><strong>End-to-End Pipeline Demonstration:</strong> Successfully demonstrates the flow of data from web crawling through to search result display.</li>
+                 </ul>
+                 <p class="important"><strong>MVP Focus:</strong> Simplicity and proving core concepts over feature richness, scalability, or robustness.</p>
+            </section>
+
+            <section id="subsection_mvp_arch">
+                <h3>2.2 Architecture (MVP v1.0.0)</h3>
+                <h4>2.2.1 Architectural Overview</h4>
+                 <p>The MVP architecture follows a linear pipeline model designed for simplicity and demonstrating the core concept. Data flows sequentially through distinct components.</p>
+                 <!-- Add Architecture Diagram Image here if available -->
+                 <!-- <img src="path/to/architecture_diagram.png" alt="MVP Architecture Diagram" style="max-width: 100%; height: auto; border: 1px solid var(--border-color); margin: 15px 0;"> -->
+                 <p><strong>Conceptual Flow:</strong> Crawl (Nutch) -> Raw Store (HDFS) -> Process/Publish (Custom App) -> Buffer (Kafka) -> Index (Vespa via Feeder App) -> Query/Serve (Vespa) -> Display (Frontend).</p>
+
+                <h4>2.2.2 Component Breakdown</h4>
+                 <div class="component-box">
+                     <strong>1. Apache Nutch (Crawler)</strong>
+                     <ul><li><strong>Role:</strong> Fetches web content based on seed URLs and URL filters.</li><li><strong>Configuration:</strong> Uses `nutch-site.xml` (agent name, HDFS pointer), `regex-urlfilter.txt` (scope control), `seed.txt` (starting points).</li><li><strong>Output:</strong> Writes crawl segments (containing raw data, parsed text, metadata) directly to HDFS.</li><li><strong>MVP Scope:</strong> Configured for limited crawl depth/breadth; standard Nutch plugins used.</li></ul>
+                 </div>
+                 <div class="component-box">
+                     <strong>2. Apache Hadoop HDFS (Raw Storage)</strong>
+                     <ul><li><strong>Role:</strong> Persistent, distributed storage for raw Nutch output segments.</li><li><strong>Configuration:</strong> Runs in <strong>Pseudo-Distributed Mode</strong> (NameNode, DataNode on localhost). Configured via `core-site.xml` (`fs.defaultFS=hdfs://localhost:9000`) and `hdfs-site.xml` (replication=1, data directories). Requires passwordless SSH to localhost.</li><li><strong>Interaction:</strong> Nutch writes directly to it; the Processing Application reads from it.</li><li><strong>MVP Scope:</strong> Acts purely as a filesystem; YARN/MapReduce capabilities are not utilized in this MVP pipeline.</li></ul>
+                 </div>
+                 <div class="component-box">
+                     <strong>3. Apache Kafka (Message Bus)</strong>
+                      <ul><li><strong>Role:</strong> Decouples the processing stage from the indexing stage, acting as a durable buffer for processed documents.</li><li><strong>Configuration:</strong> Single-node setup (one broker, one Zookeeper instance).</li><li><strong>Topic:</strong> Uses a single topic (e.g., `crawled_pages_processed`) with 1 partition and replication factor 1.</li><li><strong>Message Format:</strong> JSON objects containing `url`, `title`, `content`, `crawl_timestamp`.</li><li><strong>MVP Scope:</strong> Basic setup, no advanced configuration (security, quotas, etc.).</li></ul>
+                 </div>
+                 <div class="component-box">
+                      <strong>4. Processing & Feeder Application (Conceptual)</strong>
+                      <ul><li><strong>Role:</strong> Bridges the gap between raw storage and the search index. Reads from HDFS, transforms data, publishes to Kafka, consumes from Kafka, and feeds Vespa.</li><li><strong>Implementation:</strong> Assumed to be a custom script or application (e.g., Python, Java). Requires user implementation.</li><li><strong>Interaction:</strong> Reads segment data from HDFS (via Hadoop client libraries or `nutch readseg` output), uses Kafka producer/consumer libraries, uses Vespa HTTP Document API.</li><li><strong>MVP Scope:</strong> Focuses on basic extraction and data transfer; minimal error handling or optimization assumed.</li></ul>
+                 </div>
+                 <div class="component-box">
+                     <strong>5. Vespa (Indexing & Search Engine)</strong>
+                      <ul><li><strong>Role:</strong> Indexes processed documents, handles search queries, and performs ranking.</li><li><strong>Configuration:</strong> Runs as a single-node Docker container. Uses application package containing: <code>schemas/page.sd</code>, <code>services.xml</code>, <code>hosts.xml</code>.</li><li><strong>APIs Used:</strong> Document API (`/document/v1/...`) for feeding, Query API (`/search/...`) for searching.</li><li><strong>Ranking:</strong> Uses the default BM25 ranking profile.</li><li><strong>MVP Scope:</strong> Basic schema, default ranking, single-node deployment.</li></ul>
+                 </div>
+                 <div class="component-box">
+                      <strong>6. Frontend (Conceptual)</strong>
+                      <ul><li><strong>Role:</strong> Provides the user interface for submitting search queries and viewing results.</li><li><strong>Implementation:</strong> Simple HTML, CSS, and client-side JavaScript. Requires user implementation.</li><li><strong>Interaction:</strong> Uses JavaScript's `fetch` API to send GET requests to Vespa's Query API (`http://localhost:8080/search/`). Parses the JSON response and dynamically updates the DOM to display results.</li><li><strong>MVP Scope:</strong> Minimal functionality: search box, button, results list (Title + URL). No advanced features like pagination assumed.</li></ul>
+                 </div>
+
+                <h4>2.2.3 Data Flow Summary & Schema</h4>
+                 <ol>
+                     <li>Nutch crawls sites listed in `seed.txt` (respecting `regex-urlfilter.txt`).</li>
+                     <li>Raw page content and metadata are stored in segments on HDFS (`hdfs://localhost:9000/...`).</li>
+                     <li>The Processing Application reads data from HDFS segments.</li>
+                     <li>Extracted fields (URL, title, content, timestamp) are formatted as JSON.</li>
+                     <li>JSON messages are published to the `crawled_pages_processed` Kafka topic on `localhost:9092`.</li>
+                     <li>The Feeder Application consumes JSON messages from the Kafka topic.</li>
+                     <li>The Feeder Application sends documents via HTTP POST/PUT to the Vespa Document API endpoint (`http://localhost:8080/document/v1/...`).</li>
+                     <li>Vespa indexes the documents according to the `page.sd` schema.</li>
+                     <li>User enters a query in the Frontend (served locally).</li>
+                     <li>Frontend JavaScript sends a GET request to Vespa Query API (`http://localhost:8080/search/?query=...`).</li>
+                     <li>Vespa searches the index, ranks results using BM25, and returns JSON.</li>
+                     <li>Frontend JavaScript parses the JSON and displays clickable titles/URLs.</li>
+                 </ol>
+                 <h5>Data Schema Highlights</h5>
+                 <ul>
+                     <li><strong>Kafka Message Format:</strong> JSON
+                       <pre><code>{
+   "url": "string",
+   "title": "string",
+   "content": "string",
+   "crawl_timestamp": long
+ }</code></pre>
+                     </li>
+                     <li><strong>Vespa Schema (`page.sd`):</strong> Defines fields `url` (string, attribute), `title` (string, index), `content` (string, index), `crawl_timestamp` (long, attribute). The `default` fieldset includes `title` and `content` for searching. Includes basic BM25 rank profile.</li>
+                 </ul>
+            </section>
+
+            <section id="subsection_mvp_design_elements">
+                <h3>2.3 Design Elements & Choices (MVP v1.0.0)</h3>
+                 <ul>
+                     <li><strong>Pipeline Architecture:</strong> A straightforward, sequential flow chosen for MVP simplicity.</li>
+                     <li><strong>Component Decoupling:</strong> Kafka provides temporal decoupling between processing and indexing, allowing these stages to operate independently and buffer data.</li>
+                     <li><strong>Asynchronous Processing:</strong> The Kafka-based pipeline inherently supports asynchronous operations.</li>
+                     <li><strong>Specialized Components:</strong> Utilizes best-of-breed open-source tools for specific tasks (Nutch for crawling, HDFS for large raw storage, Kafka for messaging, Vespa for search).</li>
+                     <li><strong>Pseudo-Distributed Storage:</strong> Using Hadoop HDFS in pseudo-distributed mode allows testing HDFS integration without a full cluster, storing raw data efficiently.</li>
+                     <li><strong>Containerization (Partial):</strong> Vespa is run via Docker, simplifying its deployment and dependency management. Other components are run directly on the host OS for this MVP setup.</li>
+                     <li><strong>API-Driven Interaction:</strong> Components primarily interact via defined APIs (Kafka protocols, Vespa HTTP APIs, HDFS protocols).</li>
+                     <li><strong>Minimalism / Focus:</strong> Design choices prioritize getting the core end-to-end flow working over features, scalability, or robustness. Configuration is kept basic.</li>
+                 </ul>
+            </section>
+
+            <section id="subsection_mvp_tech_stack">
+                <h3>2.4 Technology Stack & Limits (MVP v1.0.0)</h3>
+                 <table>
+                     <thead><tr><th>Component Role</th><th>Technology</th><th>Version (Example)</th><th>MVP Role Details</th></tr></thead>
+                     <tbody>
+                         <tr><td>Web Crawling</td><td>Apache Nutch</td><td>1.19+</td><td>Fetches web content, outputs to HDFS.</td></tr>
+                         <tr><td>Raw Data Storage</td><td>Apache Hadoop HDFS</td><td>3.x</td><td>Stores Nutch segments (Pseudo-Distributed Mode).</td></tr>
+                         <tr><td>Messaging / Pipeline</td><td>Apache Kafka</td><td>3.x</td><td>Buffers processed documents (JSON). Single node.</td></tr>
+                          <tr><td>Indexing & Search</td><td>Vespa</td><td>Latest (Docker)</td><td>Indexes, searches, ranks (BM25). Single node Docker.</td></tr>
+                         <tr><td>Processing & Feeding</td><td>Custom Application</td><td>User Defined</td><td>Reads HDFS, Pub/Sub Kafka, Feeds Vespa. (Conceptual)</td></tr>
+                         <tr><td>Frontend UI</td><td>HTML, CSS, JavaScript</td><td>User Defined</td><td>Basic search input and results display. (Conceptual)</td></tr>
+                         <tr><td>Runtime Environment</td><td>Java (JDK 8/11+)</td><td>Depends on OS</td><td>Required by Hadoop, Kafka, Nutch, potentially custom apps.</td></tr>
+                          <tr><td>Containerization</td><td>Docker Engine & Compose</td><td>Latest</td><td>Runs and manages Vespa instance.</td></tr>
+                     </tbody>
+                 </table>
+                 <h4>MVP v1.0.0 Limitations</h4>
+                 <p class="warning">The MVP v1.0.0 has significant limitations regarding scalability, reliability, security, performance, relevance, data freshness, feature completeness, and resource usage. It is <strong>not</strong> suitable for production or any use case involving sensitive data without addressing the gaps outlined in the Compliance Assessment (Section 4).</p>
+            </section>
         </section>
 
         <section id="section_mvp_setup">
              <h2>3. MVP Setup & Operation (v1.0.0 Baseline)</h2>
-             <section id="subsection_setup_prereqs"><h3>3.1 Prerequisites</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_hadoop"><h3>3.2 Hadoop (Pseudo-Distributed) Setup</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_kafka"><h3>3.3 Kafka (Single Node) Setup</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_vespa"><h3>3.4 Vespa (Single Node) Setup</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_nutch"><h3>3.5 Nutch Setup</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_custom_apps_notes"><h3>3.6 Notes on Custom Applications (Conceptual for MVP)</h3><!-- ... content ... --></section>
-             <section id="subsection_setup_running_stopping"><h3>3.7 Running & Stopping the MVP</h3><!-- ... content ... --></section>
+             <p>Instructions for setting up and running the MVP v1.0.0 system on a single machine for development and testing purposes. These instructions prioritize basic functionality over security and robustness.</p>
+             <p class="warning"><strong>Disclaimer:</strong> This setup lacks security, high availability, and performance tuning. Follow these steps in a controlled environment only.</p>
+
+             <section id="subsection_setup_prereqs">
+                <h3>3.1 Prerequisites</h3>
+                 <ul>
+                     <li><strong>Operating System:</strong> Linux or macOS recommended. Windows requires WSL2 (Windows Subsystem for Linux 2).</li>
+                     <li><strong>Java Development Kit (JDK):</strong> Version 8 or 11 is generally compatible. Verify specific version requirements. Set `JAVA_HOME` environment variable.</li>
+                     <li><strong>SSH Client & Server:</strong> Required for Hadoop pseudo-distributed mode. Configured for passwordless SSH to `localhost`.</li>
+                     <li><strong>Docker & Docker Compose:</strong> Installed and Docker daemon running.</li>
+                     <li><strong>Build Tools:</strong> As needed for custom applications (Maven, pip, npm, etc.).</li>
+                     <li><strong>Download Tools:</strong> `wget` or `curl`.</li>
+                     <li><strong>Sufficient Resources:</strong> Recommend 8GB+ RAM, ideally 16GB+ to run all components.</li>
+                 </ul>
+             </section>
+
+             <section id="subsection_setup_hadoop">
+                 <h3>3.2 Hadoop (Pseudo-Distributed) Setup</h3>
+                 <p>Configure HDFS NameNode and DataNode on the local machine.</p>
+                 <h5>A. Download & Extract Hadoop (e.g., 3.x)</h5>
+                 <pre><code class="terminal"># Example (replace URL)
+wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
+tar -xzf hadoop-3.3.6.tar.gz
+# Set HADOOP_HOME and add to PATH
+export HADOOP_HOME=/path/to/hadoop-3.3.6
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</code></pre>
+                 <h5>B. Configure `hadoop-env.sh`</h5>
+                 <p>Edit <code class="path">$HADOOP_HOME/etc/hadoop/hadoop-env.sh</code> and set `JAVA_HOME`:</p>
+                 <pre><code>export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 # Example path</code></pre>
+                 <h5>C. Configure `core-site.xml`</h5>
+                 <p>Edit <code class="path">$HADOOP_HOME/etc/hadoop/core-site.xml</code>:</p>
+                 <pre><code class="language-xml"><configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/path/to/hadoop_tmp_data</value> <!-- Create this dir -->
+    </property>
+</configuration></code></pre>
+                <p class="note">Remember to create the directory specified in `hadoop.tmp.dir` (e.g., `mkdir -p /path/to/hadoop_tmp_data`).</p>
+                 <h5>D. Configure `hdfs-site.xml`</h5>
+                 <p>Edit <code class="path">$HADOOP_HOME/etc/hadoop/hdfs-site.xml</code>:</p>
+                 <pre><code class="language-xml"><configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///path/to/hadoop_data/namenode</value> <!-- Create -->
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///path/to/hadoop_data/datanode</value> <!-- Create -->
+    </property>
+</configuration></code></pre>
+                 <p class="note">Create the directories specified for `dfs.namenode.name.dir` and `dfs.datanode.data.dir` (e.g., `mkdir -p /path/to/hadoop_data/namenode` and `datanode`).</p>
+                 <h5>E. Configure Passwordless SSH</h5>
+                 <pre><code class="terminal">ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+ssh localhost # Test connection, accept fingerprint if needed</code></pre>
+                 <h5>F. Format HDFS NameNode (Run ONCE Only!)</h5>
+                  <p class="warning">Warning: This erases all HDFS data. Only run on initial setup.</p>
+                 <pre><code class="terminal">$HADOOP_HOME/bin/hdfs namenode -format</code></pre>
+                 <h5>G. Start HDFS Daemons</h5>
+                 <pre><code class="terminal">$HADOOP_HOME/sbin/start-dfs.sh</code></pre>
+                 <h5>H. Verify HDFS</h5>
+                 <p>Check running Java processes using `jps` (should show NameNode, DataNode). Access HDFS Web UI: <a href="http://localhost:9870" target="_blank">http://localhost:9870</a> (default for Hadoop 3.x). Run HDFS commands:</p>
+                 <pre><code class="terminal">hdfs dfs -mkdir -p /user/<your_user> # Replace <your_user>
+hdfs dfs -ls /</code></pre>
+             </section>
+
+             <section id="subsection_setup_kafka">
+                 <h3>3.3 Kafka (Single Node) Setup</h3>
+                 <p>Run a single broker and Zookeeper.</p>
+                 <h5>A. Download & Extract Kafka (e.g., 3.x)</h5>
+                 <pre><code class="terminal"># Example (replace URL)
+wget https://dlcdn.apache.org/kafka/3.6.1/kafka_2.13-3.6.1.tgz
+tar -xzf kafka_2.13-3.6.1.tgz
+# Set KAFKA_HOME and add to PATH if desired
+export KAFKA_HOME=/path/to/kafka_2.13-3.6.1
+export PATH=$PATH:$KAFKA_HOME/bin</code></pre>
+                 <h5>B. Start Zookeeper</h5>
+                 <p>Kafka includes a script for a single-node Zookeeper.</p>
+                 <pre><code class="terminal">cd $KAFKA_HOME
+# Start Zookeeper in the background
+bin/zookeeper-server-start.sh config/zookeeper.properties &</code></pre>
+                 <p>Wait a few seconds for Zookeeper to initialize.</p>
+                 <h5>C. Start Kafka Broker</h5>
+                 <pre><code class="terminal"># Start Kafka broker in the background
+bin/kafka-server-start.sh config/server.properties &</code></pre>
+                 <p class="note">Default `server.properties` stores data in `/tmp/kafka-logs`. Consider changing `log.dirs` for persistence.</p>
+                 <h5>D. Create Kafka Topic</h5>
+                 <pre><code class="terminal">bin/kafka-topics.sh --create --topic crawled_pages_processed \
+--bootstrap-server localhost:9092 --partitions 1 --replication-factor 1</code></pre>
+                 <p class="note">`replication-factor 1` is only suitable for a single-broker setup.</p>
+                 <h5>E. Verify Kafka</h5>
+                 <p>Check `jps` (should show Kafka, QuorumPeerMain). List topics:</p>
+                 <pre><code class="terminal">bin/kafka-topics.sh --list --bootstrap-server localhost:9092</code></pre>
+             </section>
+
+             <section id="subsection_setup_vespa">
+                  <h3>3.4 Vespa (Single Node) Setup</h3>
+                  <p>Run Vespa for indexing and querying using Docker.</p>
+                  <h5>A. Create Vespa Application Structure</h5>
+                  <pre><code class="terminal">mkdir vespa_app && cd vespa_app && mkdir schemas</code></pre>
+                  <h5>B. Define Schema (`schemas/page.sd`)</h5>
+                   <pre><code class="language-sd">schema page {
+    document page {
+        field url type string { indexing: summary | attribute; attribute: fast-search; }
+        field title type string { indexing: index | summary; index: enable-bm25; }
+        field content type string { indexing: index | summary; index: enable-bm25; }
+        field crawl_timestamp type long { indexing: summary | attribute; attribute: fast-search; }
+    }
+    fieldset default { fields: title, content }
+    rank-profile default { first-phase { expression: bm25(title) + bm25(content) } }
+    document-summary minimal { summary url type string {} summary title type string {} }
+}</code></pre>
+                  <h5>C. Define Services (`services.xml`)</h5>
+                   <pre><code class="language-xml"><?xml version="1.0" encoding="UTF-8"?>
+<services version="1.0">
+    <container id="default" version="1.0">
+        <search /><document-api />
+        <nodes><node hostalias="node1" /></nodes>
+    </container>
+    <content id="pages" version="1.0">
+        <redundancy>1</redundancy>
+        <documents><document type="page" mode="index" /></documents>
+        <nodes><node hostalias="node1" distribution-key="0" /></nodes>
+    </content>
+</services></code></pre>
+                  <h5>D. Define Hosts (`hosts.xml`)</h5>
+                  <pre><code class="language-xml"><?xml version="1.0" encoding="UTF-8"?>
+<hosts>
+  <host name="localhost"><alias>node1</alias></host>
+</hosts></code></pre>
+                  <h5>E. Start Vespa Docker Container</h5>
+                  <pre><code class="terminal">docker run --detach --name vespa --hostname vespa-container \
+--publish 8080:8080 --publish 19071:19071 \
+vespaengine/vespa</code></pre>
+                  <p>Wait a minute or two for initialization.</p>
+                  <h5>F. Deploy Vespa Application</h5>
+                   <pre><code class="terminal"># Navigate to the directory *containing* vespa_app
+cd ..
+docker cp vespa_app vespa:/tmp/vespa_app
+docker exec vespa vespa-deploy prepare /tmp/vespa_app
+docker exec vespa vespa-deploy activate</code></pre>
+                   <p>(Ensure you are in the correct parent directory before running `docker cp`).</p>
+                  <h5>G. Verify Vespa</h5>
+                  <p>Check container logs (`docker logs vespa`), deployment status (`vespa-status-deployment`), service status (`curl -s --head http://localhost:19071/ApplicationStatus`), feed/query manually using `curl` to `http://localhost:8080/document/v1/...` and `http://localhost:8080/search/...`.</p>
+             </section>
+
+             <section id="subsection_setup_nutch">
+                  <h3>3.5 Nutch Setup</h3>
+                  <p>Configure Nutch for crawling and outputting to HDFS.</p>
+                  <h5>A. Download & Extract Nutch (e.g., 1.19)</h5>
+                   <pre><code class="terminal"># Example (replace URL)
+wget https://dlcdn.apache.org/nutch/1.19/apache-nutch-1.19-bin.tar.gz
+tar -xzf apache-nutch-1.19-bin.tar.gz
+# Set NUTCH_HOME and add to PATH if desired
+export NUTCH_HOME=/path/to/apache-nutch-1.19
+export PATH=$PATH:$NUTCH_HOME/bin</code></pre>
+                  <h5>B. Configure `nutch-site.xml`</h5>
+                  <p>Edit <code class="path">$NUTCH_HOME/conf/nutch-site.xml</code>:</p>
+                   <pre><code class="language-xml"><?xml version="1.0"?>
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+    <property>
+        <name>http.agent.name</name>
+        <value>MyMVPCrawler/1.0 (CHANGE_ME)</value> <!-- Change this! -->
+    </property>
+</configuration></code></pre>
+                   <p class="warning">**Crucially, you MUST set `http.agent.name`** to a descriptive value identifying your crawler.</p>
+                  <h5>C. Configure `regex-urlfilter.txt`</h5>
+                  <p>Edit <code class="path">$NUTCH_HOME/conf/regex-urlfilter.txt</code> to allow *only* your target domains for the MVP crawl. Replace defaults.</p>
+                  <pre><code># Skip common file types (adjust as needed)
+-\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|sit|eps|wmf|zip|ppt|mpg|xls|gz|rpm|tgz|mov|MOV|exe|jpeg|JPEG|js|JS|pdf|PDF)$
+
+# Allow only specific domains for MVP (EXAMPLE ONLY - replace!)
++^https?://([a-z0-9\-]+\.)*example\.com/
+#+^https?://another-allowed-domain\.org/
+
+# Deny everything else (important to limit scope)
+-.</code></pre>
+                  <h5>D. Create Seed URLs (`urls/seed.txt`)</h5>
+                  <pre><code class="terminal">cd $NUTCH_HOME
+mkdir urls # If it doesn't exist
+echo "http://example.com/" > urls/seed.txt
+# Add other seed URLs, one per line</code></pre>
+                  <h5>E. Run Initial Nutch Crawl Cycle (on HDFS)</h5>
+                  <p>These commands interact with HDFS.</p>
+                  <pre><code class="terminal">cd $NUTCH_HOME
+CRAWL_ID="crawl" # Or choose a unique name for the crawl data directory on HDFS
+
+# 1. Inject seed URLs into the CrawlDb
+bin/nutch inject $CRAWL_ID/crawldb urls/
+
+# --- Start crawl loop (Repeat 2-5 as needed) ---
+
+# 2. Generate Fetchlist
+#    -topN limits URLs per round (adjust based on crawl size)
+bin/nutch generate $CRAWL_ID/crawldb $CRAWL_ID/segments -topN 1000
+
+# Get the name of the latest segment directory created in HDFS
+LATEST_SEGMENT=$(hdfs dfs -ls -t $CRAWL_ID/segments | grep '^d' | head -1 | awk '{print $8}')
+if [ -z "$LATEST_SEGMENT" ]; then echo "Error: No segment generated."; exit 1; fi
+echo "Latest segment: $LATEST_SEGMENT"
+
+# 3. Fetch pages listed in the segment
+bin/nutch fetch $LATEST_SEGMENT
+
+# 4. Parse fetched content
+bin/nutch parse $LATEST_SEGMENT
+
+# 5. Update CrawlDb with results from this segment
+bin/nutch updatedb $CRAWL_ID/crawldb $LATEST_SEGMENT
+
+# --- End crawl loop ---
+
+# Check status
+hdfs dfs -ls $CRAWL_ID/segments/
+# bin/nutch readdb -stats $CRAWL_ID/crawldb # Check CrawlDb stats</code></pre>
+                  <p class="note">For the MVP, one or two crawl loops might be sufficient depending on the seed list and site structure.</p>
+             </section>
+
+             <section id="subsection_setup_custom_apps_notes">
+                 <h3>3.6 Notes on Custom Applications (Conceptual for MVP)</h3>
+                 <p>As stated in Section 2, the MVP relies on user-implemented Processing/Feeder and Frontend applications. Their core responsibilities are:</p>
+                 <ul>
+                     <li><strong>Processing/Feeder:</strong> Read HDFS segments -> Extract JSON -> Publish to Kafka -> Consume from Kafka -> Feed Vespa Document API.</li>
+                     <li><strong>Frontend:</strong> HTML/CSS/JS -> Capture Query -> Call Vespa Query API -> Display Results.</li>
+                 </ul>
+                 <p class="important">The successful operation of the end-to-end pipeline hinges on these custom components being correctly implemented.</p>
+             </section>
+
+             <section id="subsection_setup_running_stopping">
+                <h3>3.7 Running & Stopping the MVP</h3>
+                 <h5>Startup Sequence (Order Matters):</h5>
+                 <ol>
+                     <li>Start HDFS: `$HADOOP_HOME/sbin/start-dfs.sh`. Verify (`jps`, Web UI).</li>
+                     <li>Start Zookeeper: `$KAFKA_HOME/bin/zookeeper-server-start.sh config/zookeeper.properties &`. Verify (`jps`).</li>
+                     <li>Start Kafka Broker: `$KAFKA_HOME/bin/kafka-server-start.sh config/server.properties &`. Verify (`jps`, list topics).</li>
+                     <li>Start Vespa Container: `docker start vespa` (if exists) or `docker run ...`. Verify status (`docker ps`, service status).</li>
+                     <li>**Start your custom Processing/Feeder Application(s).** Monitor logs.</li>
+                     <li>**Start your custom Frontend Web Server.** Verify access.</li>
+                     <li>Run Nutch Crawl Commands (Inject, Generate, Fetch, etc.). Monitor Nutch logs & HDFS output.</li>
+                 </ol>
+                 <h5>Shutdown Sequence (Generally Reverse):</h5>
+                 <ol>
+                     <li>Stop Nutch Crawl commands (if running).</li>
+                     <li>Stop your Frontend Server (Ctrl+C or kill).</li>
+                     <li>Stop your Processing/Feeder Application(s) (Ctrl+C or kill).</li>
+                     <li>Stop Vespa Container: `docker stop vespa`.</li>
+                     <li>Stop Kafka Broker: `$KAFKA_HOME/bin/kafka-server-stop.sh`.</li>
+                     <li>Stop Zookeeper: `$KAFKA_HOME/bin/zookeeper-server-stop.sh`.</li>
+                     <li>Stop HDFS: `$HADOOP_HOME/sbin/stop-dfs.sh`.</li>
+                     <li>Verify processes stopped with `jps`.</li>
+                 </ol>
+            </section>
         </section>
 
         <section id="section_compliance">
              <h2>4. Compliance Assessment (MVP v1.0.0 vs. Ethiopian PDPL)</h2>
-             <section id="subsection_compliance_pdpl"><h3>4.1 PDPL Overview</h3><!-- ... content ... --></section>
-             <section id="subsection_compliance_mvp_context"><h3>4.2 MVP Data Processing Context</h3><!-- ... content ... --></section>
-             <section id="subsection_compliance_assessment"><h3>4.3 v1.0.0 Compliance Assessment Details</h3><!-- ... content ... --></section>
-             <section id="subsection_compliance_todo"><h3>4.4 Compliance TODO List (Derived from Assessment)</h3><!-- ... content ... --></section>
+             <p>Evaluates the initial MVP against the requirements of Ethiopia's Personal Data Protection Proclamation No. 1321/2024 (PDPL). This assessment reflects the state of the system *before* any remediation efforts.</p>
+             <div class="disclaimer">
+                 <strong>Legal Disclaimer:</strong> This assessment is informational and not legal advice. Consult qualified legal professionals for formal guidance.
+             </div>
+             <section id="subsection_compliance_pdpl">
+                 <h3>4.1 PDPL Overview</h3>
+                 <p>Key principles of PDPL No. 1321/2024:</p>
+                 <ul>
+                     <li><strong>Lawfulness, Fairness, and Transparency:</strong> Processing must have a valid legal basis, be fair to the data subject, and transparent about how data is used.</li>
+                     <li><strong>Purpose Limitation:</strong> Data should be collected for specified, explicit, and legitimate purposes and not further processed in a manner incompatible with those purposes.</li>
+                     <li><strong>Data Minimization:</strong> Data collected should be adequate, relevant, and limited to what is necessary for the specified purposes.</li>
+                     <li><strong>Accuracy:</strong> Personal data should be accurate and, where necessary, kept up to date.</li>
+                     <li><strong>Storage Limitation:</strong> Data should be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the data are processed.</li>
+                     <li><strong>Integrity and Confidentiality (Security):</strong> Processing must ensure appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction, or damage, using appropriate technical or organizational measures.</li>
+                     <li><strong>Accountability:</strong> The data controller is responsible for demonstrating compliance with the principles.</li>
+                 </ul>
+                 <p>The law also defines roles (Data Controller, Data Processor) and grants rights to data subjects (access, rectification, erasure, etc.).</p>
+            </section>
+
+            <section id="subsection_compliance_mvp_context">
+                 <h3>4.2 MVP Data Processing Context</h3>
+                 <p>The MVP involves the following potential processing of personal data:</p>
+                 <ol>
+                     <li><strong>Crawling (Nutch):</strong> Fetches content from publicly accessible websites. This content *may* contain personal data (names, contact details, opinions, etc.) published on those sites.</li>
+                     <li><strong>Storage (HDFS):</strong> Stores the raw crawled web content, potentially including any personal data contained within it.</li>
+                     <li><strong>Processing (Custom App):</strong> Reads raw content, extracts text (title, body). May inadvertently process personal data within that text.</li>
+                     <li><strong>Pipelining (Kafka):</strong> Transmits the extracted text (potentially containing personal data) to the indexing stage.</li>
+                     <li><strong>Indexing & Serving (Vespa):</strong> Stores and indexes the extracted text. Logs user search queries and potentially IP addresses initiating those queries.</li>
+                     <li><strong>Frontend Interaction:</strong> Receives search queries from users (which could be sensitive or contain personal data) and displays results. May interact with server logs containing IP addresses.</li>
+                 </ol>
+                 <p><strong>Data Controller Role:</strong> The entity deploying and operating this MVP search engine system is considered the Data Controller under the PDPL.</p>
+            </section>
+
+             <section id="subsection_compliance_assessment">
+                 <h3>4.3 v1.0.0 Compliance Assessment Details (Principle by Principle)</h3>
+                  <p>Summary of MVP v1.0.0 compliance state:</p>
+                 <ul>
+                     <li><strong>Lawfulness, Fairness, Transparency:</strong> Legal basis for crawling public data unclear/unvalidated (likely needs legitimate interest assessment), no transparency via Privacy Policy. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Purpose Limitation:</strong> Core purpose (search) exists but is not formally documented or communicated. <span class="compliance-status status-partial">Partially Compliant</span></li>
+                     <li><strong>Data Minimization:</strong> Full page crawling stores potentially unnecessary data. No filtering implemented. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Accuracy:</strong> Data indexed as-is from source; no mechanism for correction. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Storage Limitation:</strong> No data retention policy or deletion mechanisms implemented. Data stored indefinitely by default. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Integrity and Confidentiality (Security):</strong> Major gaps - Lacks TLS, authentication, authorization, data-at-rest encryption, secure configuration, adequate logging. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Accountability:</strong> Lacks required documentation (policies, records, DPIAs) to demonstrate compliance. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Data Subject Rights:</strong> No defined process or technical capability to handle DSARs. <span class="compliance-status status-noncompliant">Non-Compliant</span></li>
+                     <li><strong>Data Transfers:</strong> Compliance depends on hosting location; not addressed in MVP design. <span class="compliance-status status-partial">Needs Assessment</span></li>
+                 </ul>
+                 <h4>Compliance Summary (MVP v1.0.0)</h4>
+                 <p>The MVP v1.0.0 **does not meet** PDPL requirements due to significant gaps across most principles, particularly security, transparency, data minimization, storage limitation, and data subject rights.</p>
+             </section>
+
+             <section id="subsection_compliance_todo">
+                 <h3>4.4 Compliance TODO List (Derived from Assessment)</h3>
+                 <p>High-level actions required to begin addressing PDPL compliance and security gaps, derived from the v1.0.0 assessment.</p>
+                 <div class="todo-list">
+                     <h4>Compliance & Security Action Items</h4>
+                     <div class="category-heading">A. Policy & Documentation</div>
+                     <ul><li class="todo-item">Develop/Publish Privacy Policy.</li><li class="todo-item">Define/Document Data Retention Policy.</li><li class="todo-item">Establish DSAR Handling Process.</li><li class="todo-item">Conduct DPIA (if high risk).</li><li class="todo-item">Create Internal Security Policies.</li><li class="todo-item">Create DPAs (if needed).</li><li class="todo-item">Document Legal Basis for processing.</li></ul>
+                     <div class="category-heading">B. Technical - Security Enhancements</div>
+                      <ul><li class="todo-item">Implement TLS (In-transit encryption).</li><li class="todo-item">Implement AuthN/AuthZ (Access Control).</li><li class="todo-item">Implement Data-at-Rest Encryption.</li><li class="todo-item">Harden Component Configurations.</li><li class="todo-item">Implement Security Logging & Monitoring.</li><li class="todo-item">Perform Vulnerability Scanning/Pen Testing (later).</li></ul>
+                      <div class="category-heading">C. Technical - Privacy Functionality</div>
+                      <ul><li class="todo-item">Develop DSAR Fulfillment Mechanisms (search/delete).</li><li class="todo-item">Implement Data Minimization Techniques.</li><li class="todo-item">Implement Data Retention Enforcement.</li><li class="todo-item">Anonymize/Pseudonymize/Limit Logs.</li><li class="todo-item">Provide Consent Mechanisms/Notices.</li></ul>
+                 </div>
+                 <p class="important">This list requires prioritization and detailed planning as outlined in Section 5.</p>
+             </section>
         </section>
 
         <section id="section_planning">
             <h2>5. Post-MVP Planning</h2>
-            <section id="subsection_planning_analysis"><h3>5.1 Post-MVP Analysis & Strategic Decision</h3><!-- ... content ... --></section>
-            <section id="subsection_planning_iteration"><h3>5.2 Planning the Next Iteration (e.g., v1.1.0)</h3><!-- ... content ... --></section>
-            <section id="subsection_planning_guidelines"><h3>5.3 Implementation Guidelines for Next Iteration(s)</h3><!-- ... content ... --></section>
+            <p>Framework for analyzing the MVP state and planning future development focused on addressing the identified compliance and security gaps.</p>
+            <section id="subsection_planning_analysis">
+                <h3>5.1 Post-MVP Analysis & Strategic Decision</h3>
+                <div class="section-box">
+                    <h4>5.1.1 Internal Review & Risk Assessment</h4>
+                    <p>Review the compliance assessment (Section 4.3). Understand the specific findings and associated risks (Legal, Reputational, Operational, Financial) for each non-compliant area identified in the TODO list (Section 4.4). Qualify these risks (e.g., High, Medium, Low).</p>
+                </div>
+                <div class="section-box">
+                    <h4>5.1.2 Prioritization of TODO List Items</h4>
+                    <p>Using the risk assessment, prioritize the Compliance TODO List items. Assign priorities based on criticality:</p>
+                    <ul><li><strong>Priority 1 (Critical):</strong> Fundamental legal needs (e.g., Privacy Policy, Legal Basis), critical security flaws (e.g., no TLS, open APIs).</li><li><strong>Priority 2 (High):</strong> Significant gaps (e.g., basic DSAR process, retention enforcement, internal TLS, basic minimization).</li><li><strong>Priority 3 (Medium):</strong> Best practices, lower-risk items (e.g., full data-at-rest encryption, advanced PII filtering).</li></ul>
+                    <p class="note">Document the agreed-upon prioritization.</p>
+                </div>
+                 <div class="section-box decision-point">
+                    <h4>5.1.3 Strategic Decision Point</h4>
+                    <p>Based on risks and prioritized effort, decide the path forward:</p>
+                    <ol><li><strong>Remediate & Iterate:</strong> Commit to addressing prioritized TODOs in the next development cycle(s).</li><li><strong>Halt & Re-evaluate:</strong> Pause if compliance effort/risk is prohibitive.</li><li><strong>Significant Redesign:</strong> Redesign components if architecture hinders compliance.</li></ol>
+                    <p>Subsequent sections assume Option 1.</p>
+                </div>
+            </section>
+            <section id="subsection_planning_iteration">
+                <h3>5.2 Planning the Next Iteration (e.g., v1.1.0)</h3>
+                 <div class="section-box">
+                     <h4>5.2.1 Define Scope for v1.1.0</h4>
+                     <p>Select a realistic set of P1 and some P2 TODOs from the prioritized list. Example Scope:</p>
+                     <ul><li>Draft/Publish initial Privacy Policy (requires legal review).</li><li>Draft initial Data Retention Policy.</li><li>Implement Frontend TLS (HTTPS, e.g., via reverse proxy).</li><li>Implement basic API key protection for Vespa APIs.</li><li>Secure SSH access.</li><li>Implement basic content filtering attempt in Nutch/Processor.</li><li>Review/Reduce log verbosity.</li><li>Document initial DSAR contact/high-level process.</li></ul>
+                     <p>Clearly exclude deferred items (e.g., full encryption, automated DSAR).</p>
+                 </div>
+                 <div class="section-box">
+                     <h4>5.2.2 Update Design & Architecture Docs</h4>
+                     <p>Modify diagrams to reflect planned changes (TLS points, auth layers). Document new components (reverse proxy?). Plan setup guide updates.</p>
+                 </div>
+                 <div class="section-box">
+                     <h4>5.2.3 Resource Allocation & Timeline</h4>
+                     <p>Estimate effort, assign tasks, allocate time/budget for Legal/Security consultation, set realistic milestones for v1.1.0.</p>
+                 </div>
+            </section>
+            <section id="subsection_planning_guidelines">
+                <h3>5.3 Implementation Guidelines for Next Iteration(s)</h3>
+                 <ul><li><strong>Prioritize Foundational Tasks:</strong> Draft policies early; implement core security (TLS, Auth) first.</li><li><strong>Engage Expertise Early:</strong> Involve Legal/Security during design/drafting.</li><li><strong>Adopt Secure Coding:</strong> Input validation, dependency updates, least privilege, secrets management.</li><li><strong>Test Thoroughly:</strong> Functional, security, compliance checks.</li><li><strong>Privacy by Design:</strong> Actively consider minimization/privacy during all development.</li></ul>
+            </section>
         </section>
 
         <section id="section_project_info">
             <h2>6. Project Information</h2>
-            <section id="subsection_project_glossary"><h3>6.1 Glossary</h3><!-- ... content ... --></section>
-            <section id="subsection_project_changelog"><h3>6.2 Change Log</h3><!-- ... content ... --></section>
+            <p>Basic administrative and collaborative information relevant to the MVP v1.0.0 phase and immediate planning.</p>
+             <section id="subsection_project_glossary">
+                <h3>6.1 Glossary</h3>
+                 <ul>
+                     <li><strong>BM25:</strong> Ranking function used by search engines.</li>
+                     <li><strong>CrawlDb:</strong> Nutch's database storing URL states.</li>
+                     <li><strong>Data Controller:</strong> Entity determining data processing purposes/means.</li>
+                     <li><strong>DSAR:</strong> Data Subject Access Request.</li>
+                     <li><strong>HDFS:</strong> Hadoop Distributed File System.</li>
+                     <li><strong>Kafka:</strong> Distributed streaming platform/message bus.</li>
+                     <li><strong>MVP:</strong> Minimum Viable Product.</li>
+                     <li><strong>Nutch:</strong> Open-source web crawler.</li>
+                     <li><strong>PDPL:</strong> Ethiopian Personal Data Protection Proclamation.</li>
+                     <li><strong>Pseudo-Distributed Mode:</strong> Running Hadoop daemons on one machine.</li>
+                     <li><strong>Schema (.sd):</strong> Vespa document structure definition.</li>
+                     <li><strong>Segment:</strong> Nutch's unit of crawled data.</li>
+                     <li><strong>Vespa:</strong> Indexing, searching, serving engine.</li>
+                     <li><strong>Zookeeper:</strong> Coordination service used by Kafka.</li>
+                 </ul>
+            </section>
+            <section id="subsection_project_changelog">
+                <h3>6.2 Change Log</h3>
+                 <ul>
+                     <li><strong>v1.0.0 (Baseline):</strong> Initial functional MVP demonstrating end-to-end pipeline. Known security/compliance limitations documented.</li>
+                      <li><strong>Docs v1.2 (Current):</strong> Created full, responsive documentation with burger menu, populated based on v1.0.0 system state and immediate planning needs.</li>
+                 </ul>
+            </section>
         </section>
 
         <section id="section_appendix">
              <h2>7. Appendix: Nutch Testing</h2>
-             <section id="appendix_crawler_test_env"><h3>7.1 Crawler Test Environment Setup Guide</h3><!-- ... content ... --></section>
-             <section id="appendix_crawler_testing"><h3>7.2 Comprehensive Crawler Testing Guide</h3><!-- ... content ... --></section>
+             <p>Detailed guides for testing the Nutch crawler component in isolation.</p>
+             <section id="appendix_crawler_test_env">
+                 <h3>7.1 Crawler Test Environment Setup Guide</h3>
+                 <!-- Content for Crawler Test Env Setup from previous response -->
+                 <h4>7.1.1 Purpose & Benefits</h4>
+                  <ul><li>Isolation from main pipeline.</li><li>Controlled content for predictable results.</li><li>Faster test cycles.</li><li>Safety (no external impact).</li><li>Easier debugging of Nutch output.</li></ul>
+                 <h4>7.1.2 Prerequisites</h4>
+                  <ul><li>Existing Nutch Installation (<code class="path">$NUTCH_HOME</code>).</li><li>Java Development Kit (JDK).</li><li>Simple HTTP Server Tool (Python 3 `http.server` recommended).</li><li>Text Editor & Terminal.</li></ul>
+                 <h4>7.1.3 Setup Steps</h4>
+                 <ol>
+                     <li><strong>Prepare Test Web Content:</strong> Create <code class="path">/path/to/your/test_site/</code> with `index.html`, `page1.html`, `page2.html`, `subdir/page3.html`, optional `robots.txt`. Add links between them.</li>
+                     <li><strong>Run Local Web Server:</strong> e.g., `python3 -m http.server 8000 --directory test_site` (run from parent dir). Verify access at <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>. Keep server running.</li>
+                     <li><strong>Create Separate Nutch Test Config:</strong>
+                         <ul>
+                             <li>`cp -r $NUTCH_HOME/conf $NUTCH_HOME/conf_test`</li>
+                             <li>Edit <code class="path">conf_test/nutch-site.xml</code>: Set `fs.defaultFS` to `file:///`, set unique test `http.agent.name`.</li>
+                             <li>Edit <code class="path">conf_test/regex-urlfilter.txt</code>: Allow *only* `+^http://localhost:8000/`, deny everything else (`-.`).</li>
+                             <li>Create <code class="path">urls_test/seed_test.txt</code> containing `http://localhost:8000/`.</li>
+                         </ul>
+                     </li>
+                     <li><strong>Run Nutch Crawl Cycle (Test Config):</strong> Use `-conf conf_test` flag. Output to a local dir (e.g., `crawl_test_run_XYZ`), not HDFS. Run Inject, Generate, Fetch, Parse, UpdateDB sequence.</li>
+                     <li><strong>Inspect Results:</strong> Check web server logs, Nutch logs, use `nutch readseg -list/-dump` on local segment data.</li>
+                 </ol>
+                  <h4>7.1.4 Key Considerations</h4>
+                  <p>Use unique test agent, ensure `fs.defaultFS=file:///`, filter strictly to localhost, clean up test data dirs.</p>
+             </section>
+             <section id="appendix_crawler_testing">
+                 <h3>7.2 Comprehensive Crawler Testing Guide</h3>
+                 <!-- Content for Comprehensive Crawler Testing from previous response -->
+                  <p>Systematically testing Nutch features using the isolated test environment.</p>
+                  <div class="test-case">
+                     <h4>Test Case 1: URL Filtering (`regex-urlfilter.txt`)</h4>
+                     <div class="objective"><strong>Objective:</strong> Verify filter rules correctly include/exclude URLs.</div>
+                     <div class="preparation"><strong>Preparation:</strong> Modify <code class="path">conf_test/regex-urlfilter.txt</code> with specific deny/allow rules (e.g., deny `page2.html$`, deny `/subdir/`).</div>
+                     <div class="execution"><strong>Execution:</strong> Run full crawl cycle using `conf_test` into a new local test dir.</div>
+                     <div class="verification"><strong>Verification:</strong> Check web server logs (requests only for allowed URLs), Nutch logs, `nutch readseg -list` output (only allowed URLs listed).</div>
+                  </div>
+                  <div class="test-case">
+                      <h4>Test Case 2: `robots.txt` Adherence</h4>
+                      <div class="objective"><strong>Objective:</strong> Verify Nutch respects `Disallow` directives.</div>
+                      <div class="preparation"><strong>Preparation:</strong> Create/modify <code class="path">test_site/robots.txt</code> (e.g., `Disallow: /page1.html`). Ensure `regex-urlfilter.txt` *allows* the path.</div>
+                      <div class="execution"><strong>Execution:</strong> Run full crawl cycle using `conf_test`.</div>
+                      <div class="verification"><strong>Verification:</strong> Check web server logs (request for `robots.txt`, NO requests for disallowed URLs), Nutch logs (robots exclusion messages), `nutch readseg -list` (disallowed URLs absent).</div>
+                  </div>
+                 <div class="test-case">
+                     <h4>Test Case 3: HTML Parsing and Link Following</h4>
+                      <div class="objective"><strong>Objective:</strong> Verify correct parsing, link extraction (relative/absolute), and CrawlDb updates.</div>
+                     <div class="preparation"><strong>Preparation:</strong> Modify test HTML to include various link types. Ensure filter/robots allow target pages.</div>
+                     <div class="execution"><strong>Execution:</strong> Run **two** full crawl loops using `conf_test`.</div>
+                     <div class="verification"><strong>Verification:</strong> Use `nutch readseg -dump` on segment 1 to check extracted `Outlinks:` for the seed page. Check web server logs during loop 2 for requests to discovered links. Check segment 2 contains data for linked pages. Check `nutch readdb -stats`.</div>
+                 </div>
+                 <div class="test-case">
+                      <h4>Test Case 4: Basic Data Extraction Observation</h4>
+                      <div class="objective"><strong>Objective:</strong> Observe default text extraction to baseline for minimization needs.</div>
+                      <div class="preparation"><strong>Preparation:</strong> Add distinct content sections (e.g., `<div class="comments">...</div>`) to a test page.</div>
+                      <div class="execution"><strong>Execution:</strong> Run one crawl loop using `conf_test`.</div>
+                      <div class="verification"><strong>Verification:</strong> Use `nutch readseg -dump` to view `ParseText:` for the modified page. Note that by default, all text is likely included.</div>
+                 </div>
+                 <div class="test-case">
+                      <h4>Test Case 5: Core Configuration Application (`nutch-site.xml`)</h4>
+                      <div class="objective"><strong>Objective:</strong> Sanity check that `conf_test` settings are applied.</div>
+                      <div class="preparation"><strong>Preparation:</strong> Make an obvious change in <code class="path">conf_test/nutch-site.xml</code> (e.g., unique `http.agent.name`).</div>
+                      <div class="execution"><strong>Execution:</strong> Run Inject/Generate/Fetch steps using `conf_test`.</div>
+                      <div class="verification"><strong>Verification:</strong> Check web server logs for the exact, unique User-Agent string set in the test config.</div>
+                 </div>
+                 <h4>Applying Changes</h4>
+                 <p class="warning">After validation, carefully transfer *only* the specific, validated configuration lines to the main <code class="path">$NUTCH_HOME/conf/</code> directory. Do not copy entire files or test data.</p>
+             </section>
         </section>
 
         <section id="section_conclusion">
              <h2>8. Overall Conclusion</h2>
-             <!-- ... content ... -->
+             <p>This document provides a focused reference for the Search Engine MVP v1.0.0. It outlines the system's design, initial setup, and crucially, its significant limitations, particularly concerning security and compliance with regulations like the Ethiopian PDPL.</p>
+             <p>While technically functional, the MVP requires substantial remediation outlined in the planning sections before it can be considered for any use beyond internal development and testing. The included Nutch testing guides provide tools for validating crawler configuration changes safely as part of the necessary iteration process.</p>
+             <p>Future development must prioritize addressing the identified compliance and security TODOs to build upon this baseline foundation responsibly.</p>
         </section>
 
     </main> <!-- End of main-content -->
 
     <script>
-        // --- Same JavaScript for sidebar highlighting and smooth scroll as before ---
+        // --- Same Full JavaScript for Burger Menu, Scrollspy, Smooth Scroll as previous version ---
         document.addEventListener("DOMContentLoaded", function() {
-            const links = document.querySelectorAll('#sidebar a');
-            const sections = document.querySelectorAll('section[id]'); // Target sections for scrollspy
+            const burgerButton = document.getElementById('burger-menu');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const body = document.body;
+            const header = document.getElementById('page-header'); // Get header height
+
+            // Function to check if sidebar should be hidden by default based on width
+            function checkInitialSidebarState() {
+                 if (window.innerWidth <= 992) {
+                    body.classList.add('sidebar-hidden'); // Start hidden on mobile
+                    burgerButton.setAttribute('aria-expanded', 'false');
+                 } else {
+                     body.classList.remove('sidebar-hidden'); // Start shown on desktop
+                     burgerButton.setAttribute('aria-expanded', 'true');
+                 }
+                 body.classList.remove('sidebar-shown-mobile'); // Ensure mobile overlay class is off initially
+            }
+
+            checkInitialSidebarState(); // Set initial state on load
+
+            // --- Burger Menu Toggle Logic ---
+            burgerButton.addEventListener('click', function() {
+                const isMobile = window.innerWidth <= 992;
+
+                if (isMobile) {
+                     body.classList.toggle('sidebar-shown-mobile');
+                     burgerButton.setAttribute('aria-expanded', body.classList.contains('sidebar-shown-mobile').toString());
+                     if (body.classList.contains('sidebar-shown-mobile')) {
+                         body.classList.remove('sidebar-hidden');
+                     } else {
+                          body.classList.add('sidebar-hidden');
+                     }
+                } else {
+                    body.classList.toggle('sidebar-hidden');
+                    burgerButton.setAttribute('aria-expanded', !body.classList.contains('sidebar-hidden').toString());
+                    body.classList.remove('sidebar-shown-mobile');
+                }
+            });
+
+             // --- Close mobile overlay on main content click ---
+              mainContent.addEventListener('click', function(e) {
+                 if (body.classList.contains('sidebar-shown-mobile')) {
+                     // Prevent closing if click is on burger itself
+                     if (e.target !== burgerButton && !burgerButton.contains(e.target)) {
+                         body.classList.remove('sidebar-shown-mobile');
+                         body.classList.add('sidebar-hidden');
+                         burgerButton.setAttribute('aria-expanded', 'false');
+                     }
+                 }
+             });
+
+             // --- Sidebar Link Highlighting (Scrollspy) & Smooth Scroll ---
+            const navLinks = document.querySelectorAll('#sidebar a');
+            const sections = document.querySelectorAll('section[id]');
             let currentActive = null;
+            const headerHeight = header.offsetHeight; // Get actual header height
 
             function changeActiveLink() {
                 let index = sections.length;
-                let found = false;
+                let scrollPosition = window.scrollY + headerHeight + 20; // Offset for fixed header + buffer
 
+                let foundSection = false;
                 while(--index >= 0) {
                     const sectionTop = sections[index].offsetTop;
-                    // Use a small offset from the top of the viewport
-                    if (window.scrollY + 60 >= sectionTop) {
+                    if (scrollPosition >= sectionTop) {
                         const targetId = sections[index].id;
                         const activeLink = document.querySelector(`#sidebar a[href="#${targetId}"]`);
 
-                        if (activeLink) {
-                             // Remove active class from all links first
-                            links.forEach(link => link.classList.remove('active'));
-                            // Remove active class from parent links if any
-                             document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active'));
-
-
+                        if (activeLink && currentActive !== activeLink) {
+                            navLinks.forEach(link => link.classList.remove('active', 'parent-active')); // Clear all first
                             activeLink.classList.add('active');
                             currentActive = activeLink;
 
-                            // Add parent highlighting if it's a sub-link
-                            let parentLi = activeLink.closest('ul')?.closest('li'); // Find parent LI if nested
-                            if(parentLi){
-                                let parentLink = parentLi.querySelector('a');
-                                if(parentLink){
-                                     parentLink.classList.add('parent-active'); // Use a different class for parent highlight maybe
-                                }
-                            }
-
-                            found = true;
+                            // Highlight parent link if nested
+                            let parentLi = activeLink.closest('ul')?.closest('li');
+                            if(parentLi){ let parentLink = parentLi.querySelector('a'); if(parentLink) parentLink.classList.add('parent-active'); }
                         }
-                        break;
+                         foundSection = true;
+                        break; // Stop once the current section is found
                     }
                 }
-                 // If scrolled near top, potentially deactivate all
-                 if (!found && currentActive) {
-                    if (window.scrollY < (sections[0]?.offsetTop || 100) - 80) { // Check against first section's top
-                        currentActive.classList.remove('active');
-                        // Remove parent highlighting too
-                        document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active'));
-                        currentActive = null;
-                    }
-                 } else if (!found && !currentActive) {
-                     // Optional: Highlight first link by default if nothing else is active
-                     // links[0]?.classList.add('active');
-                     // currentActive = links[0];
+                // If no section is found (e.g., scrolled above first section), clear active states
+                 if (!foundSection && currentActive) {
+                     if (window.scrollY < (sections[0]?.offsetTop || headerHeight + 20) - headerHeight - 20) {
+                         navLinks.forEach(link => link.classList.remove('active', 'parent-active'));
+                         currentActive = null;
+                     }
                  }
             }
 
             let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(changeActiveLink, 50);
-            });
-
+            window.addEventListener('scroll', function() { clearTimeout(scrollTimeout); scrollTimeout = setTimeout(changeActiveLink, 50); });
             changeActiveLink(); // Initial call
 
-             links.forEach(link => {
+            // --- Smooth scroll for sidebar links ---
+            navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
                     if (href && href.startsWith('#')) {
                         e.preventDefault();
                         const targetElement = document.querySelector(href);
+                        const isMobile = window.innerWidth <= 992;
+
                         if (targetElement) {
-                            // Calculate scroll position considering potential fixed headers
-                            const offsetTop = targetElement.offsetTop - 10; // Adjust 10px offset as needed
-                            window.scrollTo({
-                                top: offsetTop,
-                                behavior: 'smooth'
-                            });
+                            const offsetTop = targetElement.offsetTop - headerHeight - 10; // Adjust offset
+                            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
 
-                            // Update URL hash
-                            if(history.pushState) { history.pushState(null, null, href); }
-                            else { location.hash = href; }
+                            if(history.pushState) { history.pushState(null, null, href); } else { location.hash = href; }
 
-                            // Manually update active state on click for immediate feedback
-                            links.forEach(l => l.classList.remove('active'));
-                            document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active')); // Clear old parent highlights
-                            this.classList.add('active');
-                            currentActive = this;
-                             // Add parent highlighting on click
-                            let parentLi = this.closest('ul')?.closest('li');
-                            if(parentLi){
-                                let parentLink = parentLi.querySelector('a');
-                                if(parentLink) parentLink.classList.add('parent-active');
+                            // Close mobile sidebar after click
+                            if (isMobile && body.classList.contains('sidebar-shown-mobile')) {
+                                body.classList.remove('sidebar-shown-mobile');
+                                body.classList.add('sidebar-hidden');
+                                burgerButton.setAttribute('aria-expanded', 'false');
                             }
+                             // --- Removed immediate highlight update on click, rely on scrollspy ---
                         }
                     }
                 });
             });
+
+             // --- Handle window resize ---
+              window.addEventListener('resize', () => {
+                 const isMobile = window.innerWidth <= 992;
+                 if (!isMobile) {
+                     // If resizing to desktop view, remove mobile overlay class and ensure sidebar state is reasonable
+                     body.classList.remove('sidebar-shown-mobile');
+                     // If it was hidden on mobile, keep it hidden on desktop resize unless explicitly shown
+                     // checkInitialSidebarState(); // Re-check default state (might be better)
+                 } else {
+                      // If resizing to mobile view and sidebar was open via desktop toggle, hide it initially
+                      if(!body.classList.contains('sidebar-shown-mobile') && !body.classList.contains('sidebar-hidden')){
+                          body.classList.add('sidebar-hidden');
+                          burgerButton.setAttribute('aria-expanded', 'false');
+                      }
+                 }
+                 // Re-run scrollspy on resize
+                 changeActiveLink();
+             });
         });
     </script>
 

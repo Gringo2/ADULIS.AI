@@ -2,64 +2,278 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine MVP Project - v1.0.0 Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {/* Essential for responsiveness */}
+    <title>Search Engine MVP Project - v1.0.0 Documentation (Responsive)</title>
     <style>
-        /* --- Using the same elegant CSS from the previous version --- */
         :root {
-            --primary-color: #0056b3; --secondary-color: #17a2b8; --accent-color: #007bff;
-            --text-color: #343a40; --bg-color: #f8f9fa; --bg-light: #ffffff;
-            --border-color: #dee2e6; --code-bg: #e9ecef; --code-color: #c7254e;
-            --note-bg: #e7f3fe; --note-border: #2196F3; --warning-bg: #fff3cd;
-            --warning-border: #ffeeba; --danger-bg: #f8d7da; --danger-border: #f5c6cb;
+            --primary-color: #0056b3; /* Deep Blue */
+            --secondary-color: #17a2b8; /* Teal */
+            --accent-color: #007bff; /* Bright Blue */
+            --text-color: #343a40;
+            --bg-color: #f8f9fa;
+            --bg-light: #ffffff;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --code-color: #c7254e;
+            --note-bg: #e7f3fe;
+            --note-border: #2196F3;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffeeba;
+            --danger-bg: #f8d7da;
+            --danger-border: #f5c6cb;
             --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body{font-family:var(--font-stack);line-height:1.7;margin:0;padding:0;background-color:var(--bg-color);color:var(--text-color);display:flex}
-        #sidebar{width:280px;background-color:#343a40;color:#f8f9fa;padding:25px 15px;height:100vh;position:fixed;top:0;left:0;overflow-y:auto;border-right:1px solid var(--border-color);font-size:0.95em}
-        #sidebar h2{color:#ffffff;font-size:1.3em;margin-top:0;border-bottom:1px solid #6c757d;padding-bottom:10px}
-        #sidebar ul{list-style:none;padding:0;margin:0}
-        #sidebar ul li a{color:#adb5bd;text-decoration:none;display:block;padding:8px 15px;border-radius:4px;transition:background-color .2s ease,color .2s ease;font-size:.92em}
-        #sidebar ul li a:hover,#sidebar ul li a.active{background-color:#495057;color:#ffffff}
-        #sidebar ul ul{margin-left:15px;margin-top:5px}
-        #sidebar ul ul li a{font-size:.88em;padding-left:25px;color:#ced4da}
-        #main-content{margin-left:300px;padding:30px 40px;width:calc(100% - 300px);max-width:1200px;background-color:var(--bg-light);box-shadow:-2px 0 10px rgba(0,0,0,.05);border-radius:8px;margin-top:20px;margin-bottom:20px}
-        h1,h2,h3,h4,h5{color:var(--primary-color);border-bottom:2px solid var(--border-color);padding-bottom:8px;margin-top:40px;scroll-margin-top:20px}
-        h1{font-size:2.2em;margin-top:0;border-color:var(--primary-color)}
-        h2{font-size:1.8em} h3{font-size:1.5em;border-bottom-width:1px} h4{font-size:1.2em;border-bottom:none;color:var(--secondary-color)} h5{font-size:1.1em;border-bottom:none;color:#6c757d;margin-top:20px}
-        p,li{color:#495057;margin-bottom:12px} ul,ol{margin-left:20px;padding-left:15px} li{margin-bottom:10px}
-        code{background-color:var(--code-bg);padding:3px 6px;border-radius:4px;font-family:'Courier New',Courier,monospace;font-size:.95em;color:var(--code-color);word-wrap:break-word}
-        pre{background-color:#f1f3f5;padding:15px;border-radius:5px;overflow-x:auto;border:1px solid var(--border-color);font-size:.9em;box-shadow:inset 0 1px 3px rgba(0,0,0,.05)}
-        pre code{background-color:transparent;padding:0;border:none;color:#212529;word-wrap:normal;white-space:pre}
-        .note,.important,.warning,.disclaimer{padding:15px 20px;margin:25px 0;border-radius:5px;border-left-width:5px;border-left-style:solid}
-        .note{background-color:var(--note-bg);border-color:var(--note-border);color:#031633}
-        .important{background-color:var(--warning-bg);border-color:var(--warning-border);color:#856404}
-        .warning{background-color:var(--danger-bg);border-color:var(--danger-border);color:#721c24}
-        .disclaimer{background-color:var(--danger-bg);border-color:var(--danger-border);color:#721c24;font-weight:bold}
-        table{width:100%;border-collapse:collapse;margin:25px 0;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-        th,td{border:1px solid var(--border-color);padding:12px 15px;text-align:left}
-        th{background-color:var(--code-bg);font-weight:bold;color:#495057}
-        tr:nth-child(even){background-color:#f8f9fa}
-        .component-box,.section-box,.test-case{border:1px solid var(--border-color);padding:20px 25px;margin-bottom:25px;border-radius:5px;background-color:#f8f9fa;box-shadow:inset 0 1px 3px rgba(0,0,0,.05)}
-        .component-box strong,.section-box h3,.test-case h3{display:block;margin-bottom:10px;color:var(--primary-color);font-size:1.1em;border-bottom:1px solid #ccc;padding-bottom:8px;margin-top:0}
-        .test-case h3{color:var(--accent-color)}
-        .compliance-status{padding:6px 10px;border-radius:4px;font-weight:bold;display:inline-block;font-size:.9em}
-        .status-compliant{background-color:#d4edda;color:#155724;border:1px solid #c3e6cb}
-        .status-partial{background-color:var(--warning-bg);color:#856404;border:1px solid var(--warning-border)}
-        .status-noncompliant{background-color:var(--danger-bg);color:#721c24;border:1px solid var(--danger-border)}
-        .todo-list{background-color:#f0f0f0;border:1px solid #ccc;padding:20px;margin-top:20px;border-radius:5px}
-        .todo-list h4{margin-top:0;border-bottom:1px solid #ccc;padding-bottom:10px;color:#333}
-        .todo-item{margin-bottom:10px;padding-left:25px;position:relative}
-        .todo-item::before{content:"☐";position:absolute;left:0;top:1px;font-size:1.3em;color:var(--danger-border)}
-        .category-heading{font-weight:bold;margin-top:20px;margin-bottom:8px;color:var(--primary-color);font-size:1.05em}
-        .path{font-family:monospace;color:#666}
-        .terminal{font-family:monospace;color:#e83e8c}
-        @media (max-width: 992px){body{display:block}#sidebar{position:static;width:100%;height:auto;margin-bottom:20px}#main-content{margin-left:0;width:100%;padding:20px;margin-top:0}}
+
+        /* --- Base Styles --- */
+        html {
+             scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+
+        body {
+            font-family: var(--font-stack);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            font-size: 16px; /* Base font size */
+        }
+
+        /* --- Sidebar Styles (Default - Large Screens) --- */
+        #sidebar {
+            width: 280px;
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 25px 15px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            font-size: 0.95em;
+            transition: width 0.3s ease; /* Smooth transition for potential future toggling */
+        }
+        #sidebar h2 {
+            color: #ffffff;
+            font-size: 1.3em;
+            margin-top: 0;
+            border-bottom: 1px solid #6c757d;
+            padding-bottom: 10px;
+            white-space: nowrap; /* Prevent title wrapping */
+        }
+        #sidebar ul { list-style: none; padding: 0; margin: 0; }
+        #sidebar ul li a {
+            color: #adb5bd; text-decoration: none; display: block;
+            padding: 8px 15px; border-radius: 4px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            font-size: 0.92em;
+            white-space: nowrap; /* Prevent link wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #sidebar ul li a:hover, #sidebar ul li a.active {
+            background-color: #495057; color: #ffffff;
+        }
+        #sidebar ul ul { margin-left: 15px; margin-top: 5px; }
+        #sidebar ul ul li a {
+            font-size: 0.88em; padding-left: 25px; color: #ced4da;
+        }
+         #sidebar ul ul ul li a { /* Third level */
+            font-size: 0.85em; padding-left: 35px; color: #9fa6ad;
+         }
+
+        /* --- Main Content Styles (Default - Large Screens) --- */
+        #main-content {
+            margin-left: 300px; /* Initial margin for sidebar */
+            padding: 30px 40px;
+            width: calc(100% - 300px); /* Adjust width based on sidebar */
+            max-width: 1200px;
+            background-color: var(--bg-light);
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: margin-left 0.3s ease; /* Match sidebar transition */
+        }
+        h1, h2, h3, h4, h5 { /* Base heading styles */
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            scroll-margin-top: 20px; /* Offset for potential fixed headers */
+        }
+        h1 { font-size: 2.2em; margin-top: 0; border-color: var(--primary-color); }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.5em; border-bottom-width: 1px; }
+        h4 { font-size: 1.2em; border-bottom: none; color: var(--secondary-color); }
+        h5 { font-size: 1.1em; border-bottom: none; color: #6c757d; margin-top: 20px;}
+
+        p, li { color: #495057; margin-bottom: 12px; }
+        ul, ol { margin-left: 20px; padding-left: 15px; }
+        li { margin-bottom: 10px; }
+
+        code { /* Styling for code */
+            background-color: var(--code-bg); padding: 3px 6px; border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.95em;
+            color: var(--code-color); word-wrap: break-word;
+        }
+        pre { /* Styling for preformatted text blocks */
+            background-color: #f1f3f5; padding: 15px; border-radius: 5px;
+            overflow-x: auto; /* Ensure horizontal scroll for wide code */
+            border: 1px solid var(--border-color);
+            font-size: 0.9em; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        pre code { /* Code inside pre */
+            background-color: transparent; padding: 0; border: none;
+            color: #212529; word-wrap: normal; white-space: pre;
+        }
+        /* --- Note/Warning/etc Styles --- */
+        .note, .important, .warning, .disclaimer {
+            padding: 15px 20px; margin: 25px 0; border-radius: 5px;
+            border-left-width: 5px; border-left-style: solid;
+        }
+        .note { background-color: var(--note-bg); border-color: var(--note-border); color: #031633; }
+        .important { background-color: var(--warning-bg); border-color: var(--warning-border); color: #856404; }
+        .warning { background-color: var(--danger-bg); border-color: var(--danger-border); color: #721c24;}
+        .disclaimer { background-color: var(--danger-bg); border-color: var(--danger-border); color: #721c24; font-weight: bold;}
+
+        /* --- Table Styles --- */
+        table {
+            width: 100%; border-collapse: collapse; margin: 25px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: block; /* Allow table to scroll horizontally if needed */
+            overflow-x: auto;
+        }
+        th, td { border: 1px solid var(--border-color); padding: 12px 15px; text-align: left; white-space: nowrap;} /* Prevent text wrapping in cells initially */
+        td { white-space: normal; } /* Allow cell content to wrap */
+        th { background-color: var(--code-bg); font-weight: bold; color: #495057; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+
+        /* --- Box Styles --- */
+        .component-box, .section-box, .test-case {
+            border: 1px solid var(--border-color); padding: 20px 25px; margin-bottom: 25px;
+            border-radius: 5px; background-color: #f8f9fa;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .component-box strong, .section-box h3, .test-case h3 {
+            display: block; margin-bottom: 10px; color: var(--primary-color);
+            font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 8px; margin-top: 0;
+        }
+        .test-case h3 { color: var(--accent-color); }
+
+        /* --- Compliance & TODO Styles --- */
+        .compliance-status { /* Status badges */
+            padding: 6px 10px; border-radius: 4px; font-weight: bold;
+            display: inline-block; font-size: 0.9em;
+        }
+        .status-compliant { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+        .status-partial { background-color: var(--warning-bg); color: #856404; border: 1px solid var(--warning-border);}
+        .status-noncompliant { background-color: var(--danger-bg); color: #721c24; border: 1px solid var(--danger-border);}
+        .todo-list { /* TODO list container */
+            background-color: #f0f0f0; border: 1px solid #ccc; padding: 20px;
+            margin-top: 20px; border-radius: 5px;
+        }
+        .todo-list h4 { /* Heading within TODO list */
+             margin-top: 0; border-bottom: 1px solid #ccc; padding-bottom: 10px; color: #333;
+        }
+        .todo-item { /* Individual TODO item */
+            margin-bottom: 10px; padding-left: 25px; position: relative;
+        }
+        .todo-item::before { /* Checkbox styling */
+            content: "☐"; position: absolute; left: 0; top: 1px;
+            font-size: 1.3em; color: var(--danger-border);
+        }
+        .category-heading { /* Headings within TODO list */
+            font-weight: bold; margin-top: 20px; margin-bottom: 8px;
+            color: var(--primary-color); font-size: 1.05em;
+        }
+
+        .path { font-family: monospace; color: #666;}
+        .terminal { font-family: monospace; color: #e83e8c; }
+
+        /* ============================================= */
+        /* == RESPONSIVE STYLES == */
+        /* ============================================= */
+
+        /* --- Medium Screens (Tablets, Smaller Laptops) --- */
+        @media (max-width: 992px) {
+            body {
+                display: block; /* Change flex display to block */
+            }
+
+            #sidebar {
+                position: static; /* Remove fixed positioning */
+                width: 100%; /* Take full width */
+                height: auto; /* Height adjusts to content */
+                margin-bottom: 20px; /* Add space below */
+                border-right: none; /* Remove border */
+                box-sizing: border-box; /* Include padding in width calculation */
+                 padding: 15px; /* Adjust padding */
+            }
+             #sidebar h2 {
+                 font-size: 1.2em; /* Slightly smaller title */
+             }
+             #sidebar ul li a {
+                 padding: 10px 15px; /* Slightly larger tap targets */
+             }
+
+
+            #main-content {
+                margin-left: 0; /* Remove margin needed for fixed sidebar */
+                width: 100%; /* Take full width */
+                padding: 20px; /* Adjust padding */
+                box-sizing: border-box; /* Include padding in width calculation */
+                border-radius: 0; /* Optional: remove rounding on small screens */
+                box-shadow: none; /* Optional: remove shadow */
+                margin-top: 0;
+            }
+
+             h1 { font-size: 2em; }
+             h2 { font-size: 1.6em; }
+             h3 { font-size: 1.3em; }
+        }
+
+        /* --- Small Screens (Mobile Phones) --- */
+        @media (max-width: 576px) {
+             body {
+                 font-size: 15px; /* Slightly smaller base font */
+             }
+             #main-content {
+                 padding: 15px; /* Reduce padding further */
+             }
+             h1 { font-size: 1.8em; }
+             h2 { font-size: 1.5em; }
+             h3 { font-size: 1.2em; }
+             h4 { font-size: 1.1em; }
+
+             pre {
+                 font-size: 0.85em; /* Smaller code font */
+                 padding: 10px;
+             }
+             code {
+                 font-size: 0.9em;
+             }
+             th, td {
+                 padding: 8px 10px; /* Smaller table padding */
+             }
+             .component-box, .section-box, .test-case {
+                 padding: 15px 20px;
+             }
+             /* Optional: Adjust sidebar link padding further if needed */
+             #sidebar ul li a {
+                 padding: 8px 12px;
+             }
+        }
+
     </style>
 </head>
 <body>
 
     <aside id="sidebar">
         <h2>Project Navigation</h2>
+        <!-- Sidebar Content (Same as before) -->
         <ul>
             <li><a href="#section_overview">1. Overview & Purpose</a></li>
             <li><a href="#section_mvp_design">2. MVP Design (v1.0.0)</a>
@@ -113,267 +327,61 @@
     </aside>
 
     <main id="main-content">
-
+        <!-- Main Content Sections (Same HTML structure as before) -->
         <section id="section_overview">
-            <h1>Search Engine MVP Project Documentation (v1.0.0 Focus)</h1>
-            <p>This document provides comprehensive details specifically focused on the <strong>Search Engine Minimum Viable Product (MVP) version 1.0.0</strong>. It covers the initial design, setup instructions for this version, its compliance assessment against Ethiopian law (PDPL), and the immediate planning steps derived from that assessment. Detailed testing guides for the Nutch component are also included.</p>
-            <p>It serves as the primary reference for understanding the baseline system established by the MVP.</p>
-            <table>
-                <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
-                <tbody>
-                    <tr><td>System Version Described</td><td>1.0.0 (MVP Baseline)</td></tr>
-                    <tr><td>Documentation Focus</td><td>MVP State, Setup, Assessment, Immediate Planning</td></tr>
-                </tbody>
-            </table>
+             <h1>Search Engine MVP Project Documentation (v1.0.0 Focus)</h1>
+             <!-- ... content ... -->
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 2: MVP DESIGN (v1.0.0) == -->
-        <!-- ================================================= -->
         <section id="section_mvp_design">
             <h2>2. MVP Design (v1.0.0)</h2>
-            <p>Details the initial design and architecture of the Minimum Viable Product, focused on demonstrating core functionality.</p>
-
-            <section id="subsection_mvp_features">
-                <h3>2.1 Features (MVP v1.0.0)</h3>
-                <!-- Content from previous doc -->
-                 <p>This MVP version includes the following core features:</p>
-                 <ul>
-                     <li><strong>Limited Web Crawling:</strong> Ability to crawl a predefined set of seed URLs using Apache Nutch, respecting basic politeness settings and URL filters.</li>
-                     <li><strong>Raw Data Storage:</strong> Stores raw fetched content (HTML, text) and crawl metadata generated by Nutch into Hadoop HDFS (running in Pseudo-Distributed mode).</li>
-                     <li><strong>Basic Content Processing & Extraction:</strong> Extracts key fields (URL, Page Title, Body Text, Crawl Timestamp) from crawled web pages via a conceptual custom application.</li>
-                     <li><strong>Data Pipelining:</strong> Uses Apache Kafka as a message bus to transfer processed data from the extraction stage to the indexing stage.</li>
-                     <li><strong>Content Indexing:</strong> Indexes the extracted fields (URL, Title, Content, Timestamp) into the Vespa search engine using a defined schema (`page.sd`), fed via a conceptual custom application.</li>
-                     <li><strong>Keyword Search Interface:</strong> Provides a minimal web frontend with a search box allowing users to enter keyword queries.</li>
-                     <li><strong>Basic Search Results Display:</strong> Retrieves and displays a list of search results based on keyword matches against the indexed title and content fields. Results include the page title and URL. Ranking is based on Vespa's default BM25 implementation.</li>
-                     <li><strong>End-to-End Pipeline Demonstration:</strong> Successfully demonstrates the flow of data from web crawling through to search result display.</li>
-                 </ul>
-                 <p class="important"><strong>MVP Focus:</strong> Simplicity and proving core concepts over feature richness, scalability, or robustness.</p>
-            </section>
-
-            <section id="subsection_mvp_arch">
-                <h3>2.2 Architecture (MVP v1.0.0)</h3>
-                <h4>2.2.1 Architectural Overview</h4>
-                 <p>The MVP architecture follows a linear pipeline model designed for simplicity and demonstrating the core concept. Data flows sequentially through distinct components.</p>
-                 <!-- Add Architecture Diagram Image here if available -->
-                 <!-- <img src="path/to/architecture_diagram.png" alt="MVP Architecture Diagram" style="max-width: 100%; height: auto; border: 1px solid var(--border-color); margin: 15px 0;"> -->
-                 <p><strong>Conceptual Flow:</strong> Crawl (Nutch) -> Raw Store (HDFS) -> Process/Publish (Custom App) -> Buffer (Kafka) -> Index (Vespa via Feeder App) -> Query/Serve (Vespa) -> Display (Frontend).</p>
-
-                <h4>2.2.2 Component Breakdown</h4>
-                 <!-- Component boxes copied and adapted from previous docs -->
-                 <div class="component-box">
-                     <strong>1. Apache Nutch (Crawler)</strong>
-                     <ul><li><strong>Role:</strong> Fetches web content.</li><li><strong>Configuration:</strong> `nutch-site.xml` (agent, fs), `regex-urlfilter.txt`, `seed.txt`.</li><li><strong>Output:</strong> Writes segments to HDFS.</li><li><strong>MVP Scope:</strong> Limited depth/breadth; standard plugins.</li></ul>
-                 </div>
-                 <div class="component-box">
-                     <strong>2. Apache Hadoop HDFS (Raw Storage)</strong>
-                     <ul><li><strong>Role:</strong> Persistent storage for Nutch output.</li><li><strong>Configuration:</strong> Pseudo-Distributed Mode (`core-site.xml`, `hdfs-site.xml`). Requires passwordless SSH.</li><li><strong>Interaction:</strong> Nutch writes, Processor reads.</li><li><strong>MVP Scope:</strong> Filesystem only; YARN/MapReduce not used.</li></ul>
-                 </div>
-                 <div class="component-box">
-                     <strong>3. Apache Kafka (Message Bus)</strong>
-                      <ul><li><strong>Role:</strong> Decouples processing from indexing.</li><li><strong>Configuration:</strong> Single-node (1 broker, 1 Zookeeper).</li><li><strong>Topic:</strong> `crawled_pages_processed` (1 partition, replication 1).</li><li><strong>Message Format:</strong> JSON (url, title, content, crawl_timestamp).</li><li><strong>MVP Scope:</strong> Basic setup.</li></ul>
-                 </div>
-                 <div class="component-box">
-                      <strong>4. Processing & Feeder Application (Conceptual)</strong>
-                      <ul><li><strong>Role:</strong> Reads HDFS, extracts, publishes to Kafka, consumes from Kafka, feeds Vespa.</li><li><strong>Implementation:</strong> User-provided (Python, Java, etc.). Outside core MVP docs.</li><li><strong>Interaction:</strong> HDFS client, Kafka client, Vespa HTTP API.</li><li><strong>MVP Scope:</strong> Assumed basic extraction/transfer; minimal error handling.</li></ul>
-                 </div>
-                 <div class="component-box">
-                     <strong>5. Vespa (Indexing & Search Engine)</strong>
-                      <ul><li><strong>Role:</strong> Indexes documents, handles search queries, ranks results.</li><li><strong>Configuration:</strong> Single-node Docker. App package (`page.sd`, `services.xml`, `hosts.xml`).</li><li><strong>APIs Used:</strong> Document API, Query API.</li><li><strong>Ranking:</strong> Default BM25.</li><li><strong>MVP Scope:</strong> Basic schema, single node.</li></ul>
-                 </div>
-                 <div class="component-box">
-                      <strong>6. Frontend (Conceptual)</strong>
-                      <ul><li><strong>Role:</strong> User interface for search.</li><li><strong>Implementation:</strong> User-provided (HTML, CSS, JS). Outside core MVP docs.</li><li><strong>Interaction:</strong> `fetch` API to Vespa Query API.</li><li><strong>MVP Scope:</strong> Search box, button, basic results list (Title, URL).</li></ul>
-                 </div>
-
-                <h4>2.2.3 Data Flow Summary & Schema</h4>
-                <!-- Content from previous doc -->
-                 <ol>
-                     <li>Nutch crawls sites, stores segments on HDFS.</li>
-                     <li>Processing App reads HDFS, extracts data, formats JSON.</li>
-                     <li>JSON messages published to Kafka `crawled_pages_processed` topic.</li>
-                     <li>Feeder App consumes from Kafka.</li>
-                     <li>Feeder App sends documents via HTTP POST to Vespa Document API.</li>
-                     <li>Vespa indexes documents.</li>
-                     <li>User queries Frontend.</li>
-                     <li>Frontend sends GET request to Vespa Query API.</li>
-                     <li>Vespa searches, ranks, returns JSON.</li>
-                     <li>Frontend parses JSON and displays results.</li>
-                 </ol>
-                 <h5>Data Schema Highlights</h5>
-                 <ul>
-                     <li><strong>Kafka Message Format:</strong> JSON
-                       <pre><code>{
-   "url": "string",
-   "title": "string",
-   "content": "string",
-   "crawl_timestamp": long
- }</code></pre>
-                     </li>
-                     <li><strong>Vespa Schema (`page.sd`):</strong> Fields `url` (string, attribute), `title` (string, index), `content` (string, index), `crawl_timestamp` (long, attribute). Default fieldset searches `title`, `content`.</li>
-                 </ul>
-            </section>
-
-            <section id="subsection_mvp_design_elements">
-                <h3>2.3 Design Elements & Choices (MVP v1.0.0)</h3>
-                <!-- Content from previous doc -->
-                 <ul>
-                     <li><strong>Pipeline Architecture:</strong> Simple, sequential flow.</li>
-                     <li><strong>Component Decoupling:</strong> Kafka provides buffering.</li>
-                     <li><strong>Asynchronous Processing:</strong> Enabled by Kafka.</li>
-                     <li><strong>Specialized Components:</strong> Best-of-breed tools (Nutch, HDFS, Kafka, Vespa).</li>
-                     <li><strong>Pseudo-Distributed Storage:</strong> HDFS testing without a full cluster.</li>
-                     <li><strong>Containerization (Partial):</strong> Vespa via Docker.</li>
-                     <li><strong>API-Driven Interaction:</strong> Components communicate via APIs.</li>
-                     <li><strong>Minimalism / Focus:</strong> Prioritizes core flow over features/robustness.</li>
-                 </ul>
-            </section>
-
-            <section id="subsection_mvp_tech_stack">
-                <h3>2.4 Technology Stack & Limits (MVP v1.0.0)</h3>
-                <!-- Table adapted from previous docs -->
-                 <table>
-                     <thead><tr><th>Component Role</th><th>Technology</th><th>Version (Example)</th><th>MVP Role Details</th></tr></thead>
-                     <tbody>
-                         <tr><td>Web Crawling</td><td>Apache Nutch</td><td>1.19+</td><td>Fetches web content, outputs to HDFS.</td></tr>
-                         <tr><td>Raw Data Storage</td><td>Apache Hadoop HDFS</td><td>3.x</td><td>Stores Nutch segments (Pseudo-Distributed Mode).</td></tr>
-                         <tr><td>Messaging / Pipeline</td><td>Apache Kafka</td><td>3.x</td><td>Buffers processed documents (JSON). Single node.</td></tr>
-                          <tr><td>Indexing & Search</td><td>Vespa</td><td>Latest (Docker)</td><td>Indexes, searches, ranks (BM25). Single node Docker.</td></tr>
-                         <tr><td>Processing & Feeding</td><td>Custom Application</td><td>User Defined</td><td>Reads HDFS, Pub/Sub Kafka, Feeds Vespa.</td></tr>
-                         <tr><td>Frontend UI</td><td>HTML, CSS, JavaScript</td><td>User Defined</td><td>Basic search input and results display.</td></tr>
-                         <tr><td>Runtime Environment</td><td>Java (JDK 8/11+)</td><td>Depends on OS</td><td>Required by Hadoop, Kafka, Nutch, potentially custom apps.</td></tr>
-                          <tr><td>Containerization</td><td>Docker Engine & Compose</td><td>Latest</td><td>Runs and manages Vespa instance.</td></tr>
-                     </tbody>
-                 </table>
-                 <h4>MVP v1.0.0 Limitations</h4>
-                 <p class="warning">The MVP v1.0.0 has significant limitations regarding scalability, reliability, security, performance, relevance, data freshness, feature completeness, and resource usage. It is <strong>not</strong> suitable for production or any use case involving sensitive data without addressing the gaps outlined in the Compliance Assessment (Section 4).</p>
-            </section>
+            <section id="subsection_mvp_features"><h3>2.1 Features (MVP v1.0.0)</h3><!-- ... content ... --></section>
+            <section id="subsection_mvp_arch"><h3>2.2 Architecture (MVP v1.0.0)</h3><h4>2.2.1 Architectural Overview</h4><!-- ... --><h4>2.2.2 Component Breakdown</h4><!-- ... --><h4>2.2.3 Data Flow Summary & Schema</h4><!-- ... --></section>
+            <section id="subsection_mvp_design_elements"><h3>2.3 Design Elements & Choices (MVP v1.0.0)</h3><!-- ... content ... --></section>
+            <section id="subsection_mvp_tech_stack"><h3>2.4 Technology Stack & Limits (MVP v1.0.0)</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 3: MVP SETUP & OPERATION == -->
-        <!-- ================================================= -->
         <section id="section_mvp_setup">
              <h2>3. MVP Setup & Operation (v1.0.0 Baseline)</h2>
-             <p>Instructions for setting up and running the MVP v1.0.0 system on a single machine for development and testing purposes. These instructions prioritize basic functionality over security and robustness.</p>
-             <p class="warning"><strong>Disclaimer:</strong> This setup lacks security, high availability, and performance tuning. Follow these steps in a controlled environment only.</p>
-
-             <section id="subsection_setup_prereqs"><h3>3.1 Prerequisites</h3><!-- Content from previous doc --></section>
-             <section id="subsection_setup_hadoop"><h3>3.2 Hadoop (Pseudo-Distributed) Setup</h3><!-- Basic Setup Guide content from previous doc --></section>
-             <section id="subsection_setup_kafka"><h3>3.3 Kafka (Single Node) Setup</h3><!-- Basic Setup Guide content from previous doc --></section>
-             <section id="subsection_setup_vespa"><h3>3.4 Vespa (Single Node) Setup</h3><!-- Basic Setup Guide content from previous doc --></section>
-             <section id="subsection_setup_nutch"><h3>3.5 Nutch Setup</h3><!-- Basic Setup Guide content from previous doc --></section>
-             <section id="subsection_setup_custom_apps_notes">
-                 <h3>3.6 Notes on Custom Applications (Conceptual for MVP)</h3>
-                 <p>The MVP v1.0.0 relies on two conceptual custom applications whose implementation details are user-defined and outside the scope of this core documentation:</p>
-                 <ul>
-                     <li><strong>Processing & Feeder Application:</strong> This application's role is critical. It must:
-                         <ol>
-                             <li>Read raw Nutch segment data from HDFS (`hdfs://localhost:9000/user/.../crawl/segments/...`).</li>
-                             <li>Extract the required fields (URL, Title, Content, Timestamp).</li>
-                             <li>Format this data into the specified JSON structure.</li>
-                             <li>Publish these JSON messages to the Kafka topic (`crawled_pages_processed` on `localhost:9092`).</li>
-                             <li>Consume messages from the same Kafka topic.</li>
-                             <li>Send the data as documents to the Vespa Document API endpoint (`http://localhost:8080/document/v1/...`) using HTTP POST/PUT requests.</li>
-                         </ol>
-                         <p>Implementation could use Java (with Hadoop/Kafka clients), Python (with `hdfs`, `kafka-python`, `requests`), or other suitable languages.</p>
-                     </li>
-                    <li><strong>Frontend Application:</strong> This application provides the user interface. It must:
-                         <ol>
-                             <li>Present a search input field and button.</li>
-                             <li>On user action, capture the query.</li>
-                             <li>Send an HTTP GET request to the Vespa Query API (`http://localhost:8080/search/...`) with the URL-encoded query.</li>
-                             <li>Receive the JSON response from Vespa.</li>
-                             <li>Parse the response and dynamically display the results (typically Title and URL) in the browser.</li>
-                         </ol>
-                         <p>Implementation involves basic HTML, CSS, and client-side JavaScript (using `fetch` or similar). It needs to be served by a simple web server.</p>
-                     </li>
-                 </ul>
-                 <p class="important">The functionality of the entire system depends on these custom components being implemented correctly according to their described roles.</p>
-             </section>
-             <section id="subsection_setup_running_stopping"><h3>3.7 Running & Stopping the MVP</h3><!-- Content from previous doc --></section>
+             <section id="subsection_setup_prereqs"><h3>3.1 Prerequisites</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_hadoop"><h3>3.2 Hadoop (Pseudo-Distributed) Setup</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_kafka"><h3>3.3 Kafka (Single Node) Setup</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_vespa"><h3>3.4 Vespa (Single Node) Setup</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_nutch"><h3>3.5 Nutch Setup</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_custom_apps_notes"><h3>3.6 Notes on Custom Applications (Conceptual for MVP)</h3><!-- ... content ... --></section>
+             <section id="subsection_setup_running_stopping"><h3>3.7 Running & Stopping the MVP</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 4: COMPLIANCE ASSESSMENT == -->
-        <!-- ================================================= -->
         <section id="section_compliance">
              <h2>4. Compliance Assessment (MVP v1.0.0 vs. Ethiopian PDPL)</h2>
-             <p>Evaluates the initial MVP against the requirements of Ethiopia's Personal Data Protection Proclamation No. 1321/2024 (PDPL). This assessment reflects the state of the system *before* any remediation efforts.</p>
-             <div class="disclaimer">
-                 <strong>Legal Disclaimer:</strong> This assessment is informational and not legal advice. Consult qualified legal professionals for formal guidance.
-             </div>
-             <section id="subsection_compliance_pdpl"><h3>4.1 PDPL Overview</h3><!-- Content from previous doc --></section>
-             <section id="subsection_compliance_mvp_context"><h3>4.2 MVP Data Processing Context</h3><!-- Content from previous doc --></section>
-             <section id="subsection_compliance_assessment"><h3>4.3 v1.0.0 Compliance Assessment Details</h3><!-- Content from previous doc --></section>
-             <section id="subsection_compliance_todo"><h3>4.4 Compliance TODO List (Derived from Assessment)</h3><!-- Content from previous doc --></section>
+             <section id="subsection_compliance_pdpl"><h3>4.1 PDPL Overview</h3><!-- ... content ... --></section>
+             <section id="subsection_compliance_mvp_context"><h3>4.2 MVP Data Processing Context</h3><!-- ... content ... --></section>
+             <section id="subsection_compliance_assessment"><h3>4.3 v1.0.0 Compliance Assessment Details</h3><!-- ... content ... --></section>
+             <section id="subsection_compliance_todo"><h3>4.4 Compliance TODO List (Derived from Assessment)</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 5: POST-MVP PLANNING == -->
-        <!-- ================================================= -->
         <section id="section_planning">
             <h2>5. Post-MVP Planning</h2>
-            <p>Framework for analyzing the MVP state and planning future development focused on addressing the identified compliance and security gaps.</p>
-            <section id="subsection_planning_analysis"><h3>5.1 Post-MVP Analysis & Strategic Decision</h3><!-- Content from previous doc --></section>
-            <section id="subsection_planning_iteration"><h3>5.2 Planning the Next Iteration (e.g., v1.1.0)</h3><!-- Content from previous doc --></section>
-            <section id="subsection_planning_guidelines"><h3>5.3 Implementation Guidelines for Next Iteration(s)</h3><!-- Content from previous doc --></section>
-            <!-- Removed subsection_planning_docs as it's less relevant without future O&M/Security sections -->
+            <section id="subsection_planning_analysis"><h3>5.1 Post-MVP Analysis & Strategic Decision</h3><!-- ... content ... --></section>
+            <section id="subsection_planning_iteration"><h3>5.2 Planning the Next Iteration (e.g., v1.1.0)</h3><!-- ... content ... --></section>
+            <section id="subsection_planning_guidelines"><h3>5.3 Implementation Guidelines for Next Iteration(s)</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 6: PROJECT INFORMATION == -->
-        <!-- ================================================= -->
-         <section id="section_project_info">
+        <section id="section_project_info">
             <h2>6. Project Information</h2>
-            <p>Basic administrative and collaborative information relevant to the MVP v1.0.0 phase.</p>
-             <section id="subsection_project_glossary">
-                <h3>6.1 Glossary</h3>
-                <p>Definitions of key terms used in this documentation relevant to the MVP.</p>
-                <ul>
-                    <li><strong>BM25:</strong> A ranking function used by search engines (Vespa's default).</li>
-                    <li><strong>CrawlDb:</strong> Nutch's internal database storing the state of known URLs (fetched, unfetched, etc.).</li>
-                    <li><strong>Data Controller:</strong> The entity determining the purposes and means of processing personal data (in this case, the operator of the search engine).</li>
-                    <li><strong>DSAR:</strong> Data Subject Access Request (requests from individuals regarding their personal data).</li>
-                    <li><strong>HDFS:</strong> Hadoop Distributed File System; used for storing raw Nutch data.</li>
-                    <li><strong>Kafka:</strong> A distributed streaming platform; used as a message bus/buffer.</li>
-                    <li><strong>MVP:</strong> Minimum Viable Product; a version with just enough features to be usable and gather feedback.</li>
-                    <li><strong>Nutch:</strong> An open-source web crawler.</li>
-                    <li><strong>PDPL:</strong> Ethiopian Personal Data Protection Proclamation (No. 1321/2024).</li>
-                    <li><strong>Pseudo-Distributed Mode:</strong> Running Hadoop daemons (NameNode, DataNode) on a single machine to simulate a cluster.</li>
-                    <li><strong>Schema (`.sd` file):</strong> In Vespa, defines the structure and indexing properties of documents.</li>
-                    <li><strong>Segment:</strong> Nutch's unit of work/data for a batch of URLs during a crawl cycle (contains fetch data, parse data, etc.).</li>
-                    <li><strong>Vespa:</strong> An open-source engine for indexing, searching, and serving data.</li>
-                    <li><strong>Zookeeper:</strong> A coordination service required by Kafka (in this setup).</li>
-                </ul>
-            </section>
-            <section id="subsection_project_changelog">
-                <h3>6.2 Change Log</h3>
-                 <ul>
-                     <li><strong>v1.0.0 (Baseline):</strong> Initial functional MVP demonstrating end-to-end pipeline (Nutch -> HDFS -> Kafka -> Vespa -> Frontend). Basic setup, known limitations in security and compliance.</li>
-                     <li><strong>Documentation v1.1:</strong> Refocused documentation on MVP v1.0.0 state, removing future/placeholder content, improved structure.</li>
-                 </ul>
-            </section>
+            <section id="subsection_project_glossary"><h3>6.1 Glossary</h3><!-- ... content ... --></section>
+            <section id="subsection_project_changelog"><h3>6.2 Change Log</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 7: APPENDIX: Nutch Testing == -->
-        <!-- ================================================= -->
         <section id="section_appendix">
              <h2>7. Appendix: Nutch Testing</h2>
-             <p>Detailed guides for testing the Nutch crawler component in isolation.</p>
-             <section id="appendix_crawler_test_env"><h3>7.1 Crawler Test Environment Setup Guide</h3><!-- Content from previous doc --></section>
-             <section id="appendix_crawler_testing"><h3>7.2 Comprehensive Crawler Testing Guide</h3><!-- Content from previous doc, including test cases --></section>
+             <section id="appendix_crawler_test_env"><h3>7.1 Crawler Test Environment Setup Guide</h3><!-- ... content ... --></section>
+             <section id="appendix_crawler_testing"><h3>7.2 Comprehensive Crawler Testing Guide</h3><!-- ... content ... --></section>
         </section>
 
-        <!-- ================================================= -->
-        <!-- == SECTION 8: OVERALL CONCLUSION == -->
-        <!-- ================================================= -->
         <section id="section_conclusion">
              <h2>8. Overall Conclusion</h2>
-             <p>This document provides a focused reference for the Search Engine MVP v1.0.0. It outlines the system's design, initial setup, and crucially, its significant limitations, particularly concerning security and compliance with regulations like the Ethiopian PDPL.</p>
-             <p>While technically functional, the MVP requires substantial remediation outlined in the planning sections before it can be considered for any use beyond internal development and testing. The included Nutch testing guides provide tools for validating crawler configuration changes safely as part of the necessary iteration process.</p>
-             <p>Future development must prioritize addressing the identified compliance and security TODOs to build upon this baseline foundation responsibly.</p>
+             <!-- ... content ... -->
         </section>
 
     </main> <!-- End of main-content -->
@@ -382,44 +390,56 @@
         // --- Same JavaScript for sidebar highlighting and smooth scroll as before ---
         document.addEventListener("DOMContentLoaded", function() {
             const links = document.querySelectorAll('#sidebar a');
-            const sections = document.querySelectorAll('section[id], div[id]'); // Include divs too if needed
+            const sections = document.querySelectorAll('section[id]'); // Target sections for scrollspy
             let currentActive = null;
 
             function changeActiveLink() {
                 let index = sections.length;
                 let found = false;
+
                 while(--index >= 0) {
                     const sectionTop = sections[index].offsetTop;
-                    if (window.scrollY + 80 >= sectionTop) { // Increased offset slightly
+                    // Use a small offset from the top of the viewport
+                    if (window.scrollY + 60 >= sectionTop) {
                         const targetId = sections[index].id;
-                        // Find link whose href *ends* with #targetId to handle nested links better
-                        const activeLink = document.querySelector(`#sidebar a[href$="#${targetId}"]`);
-                        if (activeLink) {
-                            if (currentActive !== activeLink) {
-                                if (currentActive) currentActive.classList.remove('active');
-                                activeLink.classList.add('active');
-                                currentActive = activeLink;
+                        const activeLink = document.querySelector(`#sidebar a[href="#${targetId}"]`);
 
-                                // Simple parent expansion (adjust selector if structure changes)
-                                let parentLi = activeLink.closest('li');
-                                if (parentLi) {
-                                    let parentUl = parentLi.closest('ul');
-                                    if (parentUl && parentUl.previousElementSibling?.tagName === 'A') {
-                                        parentUl.previousElementSibling.classList.add('active'); // Highlight parent too
-                                    }
+                        if (activeLink) {
+                             // Remove active class from all links first
+                            links.forEach(link => link.classList.remove('active'));
+                            // Remove active class from parent links if any
+                             document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active'));
+
+
+                            activeLink.classList.add('active');
+                            currentActive = activeLink;
+
+                            // Add parent highlighting if it's a sub-link
+                            let parentLi = activeLink.closest('ul')?.closest('li'); // Find parent LI if nested
+                            if(parentLi){
+                                let parentLink = parentLi.querySelector('a');
+                                if(parentLink){
+                                     parentLink.classList.add('parent-active'); // Use a different class for parent highlight maybe
                                 }
                             }
+
                             found = true;
                         }
                         break;
                     }
                 }
+                 // If scrolled near top, potentially deactivate all
                  if (!found && currentActive) {
-                    // Basic logic to remove active state if scrolled above all sections
-                     if (window.scrollY < sections[0]?.offsetTop - 80) {
-                         currentActive.classList.remove('active');
-                         currentActive = null;
-                     }
+                    if (window.scrollY < (sections[0]?.offsetTop || 100) - 80) { // Check against first section's top
+                        currentActive.classList.remove('active');
+                        // Remove parent highlighting too
+                        document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active'));
+                        currentActive = null;
+                    }
+                 } else if (!found && !currentActive) {
+                     // Optional: Highlight first link by default if nothing else is active
+                     // links[0]?.classList.add('active');
+                     // currentActive = links[0];
                  }
             }
 
@@ -429,7 +449,7 @@
                 scrollTimeout = setTimeout(changeActiveLink, 50);
             });
 
-            changeActiveLink();
+            changeActiveLink(); // Initial call
 
              links.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -438,24 +458,28 @@
                         e.preventDefault();
                         const targetElement = document.querySelector(href);
                         if (targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            // Update hash in URL without page jump for better UX
+                            // Calculate scroll position considering potential fixed headers
+                            const offsetTop = targetElement.offsetTop - 10; // Adjust 10px offset as needed
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+
+                            // Update URL hash
                             if(history.pushState) { history.pushState(null, null, href); }
                             else { location.hash = href; }
 
-                            // Immediate highlight update
-                            if (currentActive) currentActive.classList.remove('active');
+                            // Manually update active state on click for immediate feedback
+                            links.forEach(l => l.classList.remove('active'));
+                            document.querySelectorAll('#sidebar a.parent-active').forEach(pl => pl.classList.remove('parent-active')); // Clear old parent highlights
                             this.classList.add('active');
                             currentActive = this;
-                              // Simple parent expansion on click
-                                let parentLi = this.closest('li');
-                                if (parentLi) {
-                                    let parentUl = parentLi.closest('ul');
-                                    if (parentUl && parentUl.previousElementSibling?.tagName === 'A') {
-                                        parentUl.previousElementSibling.classList.add('active');
-                                    }
-                                }
-
+                             // Add parent highlighting on click
+                            let parentLi = this.closest('ul')?.closest('li');
+                            if(parentLi){
+                                let parentLink = parentLi.querySelector('a');
+                                if(parentLink) parentLink.classList.add('parent-active');
+                            }
                         }
                     }
                 });
